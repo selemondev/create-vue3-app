@@ -1,0 +1,36 @@
+{
+  "name": "create-vue-next",
+  "version": "1.0.0",
+  "description": "The Next Generation Vue Scaffolding Tool ✨",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "esno src/index.ts",
+    "build:package": "tsup-node src/index.ts --format esm --clean --minify"
+  },
+  "bin": {
+    "create-vue-next": "dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.11.24",
+    "@types/ora": "^3.2.0",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "conf": "^12.0.0",
+    "esno": "^4.0.0",
+    "fs-extra": "^11.2.0",
+    "ora": "^8.0.1",
+    "prettier": "^3.2.5",
+    "prompts": "^2.4.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3",
+    "validate-npm-package-name": "^5.0.0"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9"
+  }
+}

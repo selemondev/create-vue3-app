@@ -10,6 +10,7 @@ async function getVueProperty() {
   const Eslint = packageJsonMap.get('eslintJsVue');
   const EslintTs = packageJsonMap.get('eslintTsPlugin');
   const Prettier = packageJsonMap.get('prettier');
+  const Vitest = packageJsonMap.get('vitest');
   const Router = packageJsonMap.get('router');
   const Pinia = packageJsonMap.get('pinia');
   const Tailwind = packageJsonMap.get('tailwind');
@@ -29,6 +30,8 @@ async function getVueProperty() {
   options.Eslint = options.useTypeScript ? EslintTs : Eslint
 
   options.Prettier = Prettier
+
+  options.Vitest = Vitest
 
   options.Router = Router
 

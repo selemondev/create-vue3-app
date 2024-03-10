@@ -36,6 +36,11 @@ const lintMap = new Map([
   ],
 
   [
+    'VitestScript',
+    '"test:unit": "vitest",'
+  ],
+
+  [
     'TypeScriptScript',
     '"type-check": "vue-tsc --noEmit"'
   ]

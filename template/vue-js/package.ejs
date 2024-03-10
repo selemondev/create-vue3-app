@@ -10,12 +10,14 @@
     <% if (useEslint) { -%>
     <%- EslintScript %>
     <% } -%>
+    <% if (useVitest) { -%>
+    <%- VitestScript %>
+    <% } -%>
     <% if (usePrettier) { -%>
     <%- PrettierScript %>
     <% } -%>
-
     <% if (useTypeScript) { -%>
-      <%- TypeScriptScript %>
+    <%- TypeScriptScript %>
     <% } -%>
   },
   "dependencies": {
@@ -45,6 +47,9 @@
     <% } -%>
     <% if (useJavaScript) { -%>
       <%- JavaScript %>
+    <% } -%>
+    <% if (useVitest) { -%>
+      <%- Vitest %>
     <% } -%>
     <%- constantDevDeps %>
     "vite": "^5.0.11",

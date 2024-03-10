@@ -56,6 +56,9 @@ export async function ejsRender(filePath: string, name: string): Promise<void> {
                         ...opts
                     });
                     break;
+                case 'toml':
+                    prettierCode = code
+                    break;
                 case '':
                     prettierCode = code
                     break

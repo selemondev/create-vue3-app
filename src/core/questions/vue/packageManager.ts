@@ -11,7 +11,8 @@ export default {
   choices: [
     { title: 'I prefer manual installation', value: 'none' },
     {
-        title: isBunInstalled ? 'Bun' : 'Bun not installed'
+        title: isBunInstalled ? 'Bun' : 'Bun not installed',
+        value: 'bun'
     },
     {
       title: isPnpmInstalled ? 'Pnpm' : 'Pnpm not installed',

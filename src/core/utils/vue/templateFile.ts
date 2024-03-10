@@ -7,6 +7,7 @@ export function vueFetchTemplateFiles(): string[] | any[] {
     'package.json',
     options.useTypeScript ? 'src/main.ts' : 'src/main.js',
     'src/App.vue',
+    '.eslintrc.cjs'
   ]
   return files.filter(Boolean)
 }

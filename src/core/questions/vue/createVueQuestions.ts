@@ -1,13 +1,15 @@
-import PackageDevice from './packageManager'
+import packageManager from './packageManager'
 import projectName from './projectName'
-import { frameQuestions } from '../../../compile/common/frameQuestions'
+import { runPrompt } from '.'
 import createQuestion from '../../../utils/question'
+import initializeGit from "./initGit"
 import { logger } from '../../../utils/logger'
 async function createVueQuestions(): Promise<void> {
   try {
     await createQuestion(projectName)
-    await createQuestion(PackageDevice)
-    await frameQuestions.get('vue')()
+    await runPrompt();
+    await createQuestion(packageManager)
+    await createQuestion(initializeGit);
   } catch (error) {
     // cancel
     if(error instanceof Error) {

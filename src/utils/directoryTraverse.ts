@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-export function preOrderDirectoryTraverse(dir, dirCallback, fileCallback) {
+export function preOrderDirectoryTraverse(dir: string, dirCallback: Function, fileCallback: Function) {
   for (const filename of fs.readdirSync(dir)) {
     const fullpath = path.resolve(dir, filename)
     if (fs.lstatSync(fullpath).isDirectory()) {
@@ -16,7 +16,7 @@ export function preOrderDirectoryTraverse(dir, dirCallback, fileCallback) {
   }
 }
 
-export function postOrderDirectoryTraverse(dir, dirCallback, fileCallback) {
+export function postOrderDirectoryTraverse(dir: string, dirCallback: Function, fileCallback: Function) {
   for (const filename of fs.readdirSync(dir)) {
     const fullpath = path.resolve(dir, filename)
     if (fs.lstatSync(fullpath).isDirectory()) {

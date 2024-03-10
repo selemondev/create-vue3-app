@@ -4,13 +4,14 @@ import {
   lintMap,
   packageJsonMap,
 } from '../../utils/vue/ejsMapConstant'
-import createQuestion from '../../../utils/question'
+import createQuestion from '../../../utils/question';
 
 async function getVueProperty() {
-  const Eslint = packageJsonMap.get('eslintPlugin')
-  const Prettier = packageJsonMap.get('prettier')
-  const Router = packageJsonMap.get('router')
-  const Pinia = packageJsonMap.get('pinia')
+  const Eslint = packageJsonMap.get('eslintJsVue');
+  const EslintTs = packageJsonMap.get('eslintTsPlugin');
+  const Prettier = packageJsonMap.get('prettier');
+  const Router = packageJsonMap.get('router');
+  const Pinia = packageJsonMap.get('pinia');
   const Tailwind = packageJsonMap.get('tailwind');
   const TypeScript = packageJsonMap.get('typescript');
   const JavaScript = packageJsonMap.get('javascript');
@@ -25,7 +26,7 @@ async function getVueProperty() {
 
   options.EslintWithPrettierScript = packageJsonMap.get('eslintWithPrettier')
 
-  options.Eslint = Eslint
+  options.Eslint = options.useTypeScript ? EslintTs : Eslint
 
   options.Prettier = Prettier
 
@@ -39,6 +40,8 @@ async function getVueProperty() {
 
   options.JavaScript = JavaScript
 
+  options.useEslintTs = options.useTypeScript
+
   options.useJavaScript = options.useTypeScript === false;
 
   return Promise.resolve(true)
@@ -50,8 +53,8 @@ export async function runPrompt() {
   await getVueProperty()
 }
 
-function resolveOptions(originOptions, configMap: Map<any, any>) {
-  Array.from(configMap.keys()).forEach((item: any) => {
+function resolveOptions(originOptions: any, configMap: Map<string, string>) {
+  Array.from(configMap.keys()).forEach((item: string) => {
     originOptions[item] = configMap.get(item)
   })
 }

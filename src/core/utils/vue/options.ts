@@ -6,6 +6,7 @@ interface Options {
     JavaScript?: string
     Pinia?: string
     Eslint?: string
+    Vitest?: string
     Prettier?: string
     name?: string
     version?: string
@@ -20,6 +21,7 @@ interface Options {
     useTailwind?: boolean
     useTypeScript?: boolean
     useJavaScript?: boolean
+    useVitest?: string
     useGitInit?: boolean
     usePinia?: boolean
     EslintScript?: string

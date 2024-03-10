@@ -32,6 +32,15 @@ const prompt = [
         active: 'Yes',
         inactive: 'No'
     },
+
+    {
+        name: 'useVitest',
+        type: () => 'toggle',
+        message: 'Add Vitest for unit testing?',
+        initial: false,
+        active: 'Yes',
+        inactive: 'No'
+    },
     {
         name: 'useEslint',
         type: () => 'toggle',

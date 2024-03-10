@@ -70,6 +70,13 @@ const javascript = {
     version: [],
     stableVersion: [],
     dev: []
+};
+
+const vitest = {
+    name: ['vitest', 'jsdom', "@vue/test-utils"],
+    version: ["^1.2.2", "^24.0.0", "^2.4.4"],
+    stableVersion: ["^1.2.2", "^24.0.0", "^2.4.4"],
+    dev: ['dev', 'dev', 'dev']
 }
 
 const constantDevDeps = {
@@ -92,6 +99,7 @@ export {
     eslintTsPlugin,
     javascript,
     typescript,
+    vitest,
     eslintJsVue,
     prettier,
     pinia,

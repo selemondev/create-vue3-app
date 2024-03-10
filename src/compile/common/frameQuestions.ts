@@ -32,17 +32,12 @@ export function getFilterFile() {
       fs.remove(`${options.dest}/src/components/__tests__`);
     }
 
-
-    if (!options.usePrettier) {
-      fs.remove(`${options.dest}/.prettierrc.js`)
-    }
-
     if (!options.usePinia) {
       fs.remove(`${options.dest}/src/stores`)
     }
 
     if (!options.useEslint) {
-      fs.remove(`${options.dest}/.eslintrc.js`)
+      fs.remove(`${options.dest}/.eslintrc.cjs`)
     }
     return true
   }

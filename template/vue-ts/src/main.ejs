@@ -1,23 +1,29 @@
 import { createApp } from 'vue'
 <% if ( useTailwind ) { -%>
     import './assets/css/tailwind.css'
-<% } -%>
-<% if (!useTailwind ) { -%>
-    import './assets/css/base.css'
-<% } -%>
-import App from './App.vue'
-<% if ( usePinia ) { -%>
-    import { createPinia } from 'pinia';
     <% } -%>
-        <% if (useRouter) { -%>
-            import router from "./router";
+        <% if (!useTailwind ) { -%>
+            import './assets/css/base.css'
             <% } -%>
-                const app = createApp(App)
-                <% if ( usePinia ) { -%>
-                    app.use(createPinia())
+                <% if (useTanStackVueQuery) { -%>
+                    import { VueQueryPlugin } from '@tanstack/vue-query'
                     <% } -%>
-
-                        <% if (useRouter) { -%>
-                           app.use(router)
+                        import App from './App.vue'
+                        <% if ( usePinia ) { -%>
+                            import { createPinia } from 'pinia';
                             <% } -%>
-                                app.mount('#app')
+                                <% if (useRouter) { -%>
+                                    import router from "./router";
+                                    <% } -%>
+                                        const app = createApp(App)
+                                        <% if ( usePinia ) { -%>
+                                            app.use(createPinia())
+                                            <% } -%>
+
+                                                <% if (useRouter) { -%>
+                                                    app.use(router)
+                                                    <% } -%>
+                                                    <% if (useTanStackVueQuery) { -%>
+                                                        app.use(VueQueryPlugin)
+                                                        <% } -%>
+                                                        app.mount('#app')

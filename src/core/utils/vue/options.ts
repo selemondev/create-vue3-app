@@ -7,7 +7,7 @@ interface Options {
     Pinia?: string
     Eslint?: string
     Vitest?: string
-    Prettier?: string
+    TanStackVueQuery?: string
     name?: string
     version?: string
     src?: string
@@ -16,17 +16,16 @@ interface Options {
     package?: 'bun' | 'pnpm' | 'npm' | 'yarn' | 'none'
     useEslint?: boolean
     useEslintTs?: boolean
-    usePrettier?: boolean
     useRouter?: boolean
+    useVueQuery?: boolean
     useTailwind?: boolean
     useTypeScript?: boolean
     useJavaScript?: boolean
+    useTanStackVueQuery?: string
     useVitest?: string
     useGitInit?: boolean
     usePinia?: boolean
     EslintScript?: string
-    PrettierScript?: string
-    EslintWithPrettierScript?: string
     constantDevDeps?: string
     constantProDeps?: string
   }

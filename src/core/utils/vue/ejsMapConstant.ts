@@ -30,10 +30,6 @@ const lintMap = new Map([
     'EslintScript',
     '"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",'
   ],
-  [
-    'PrettierScript',
-    '"prettier": "prettier --write ./**/*.{html,vue,ts,js,json,md}",'
-  ],
 
   [
     'VitestScript',

@@ -5,6 +5,9 @@ import { createApp } from 'vue'
 <% if (!useTailwind ) { -%>
     import './assets/css/base.css'
 <% } -%>
+<% if (useTanStackVueQuery) { -%>
+    import { VueQueryPlugin } from '@tanstack/vue-query'
+<% } -%>
 import App from './App.vue'
 <% if ( usePinia ) { -%>
     import { createPinia } from 'pinia';
@@ -20,4 +23,7 @@ import App from './App.vue'
                         <% if (useRouter) { -%>
                            app.use(router)
                             <% } -%>
+                            <% if (useTanStackVueQuery) { -%>
+                                app.use(VueQueryPlugin)
+                                <% } -%>
                                 app.mount('#app')

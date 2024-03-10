@@ -34,6 +34,15 @@ const prompt = [
     },
 
     {
+        name: 'useTanStackVueQuery',
+        type: () => 'toggle',
+        message: 'Add TanStack Vue Query for server state management?',
+        initial: false,
+        active: 'Yes',
+        inactive: 'No'
+    },
+
+    {
         name: 'useVitest',
         type: () => 'toggle',
         message: 'Add Vitest for unit testing?',
@@ -45,14 +54,6 @@ const prompt = [
         name: 'useEslint',
         type: () => 'toggle',
         message: 'Add ESLint for code quality?',
-        initial: false,
-        active: 'Yes',
-        inactive: 'No'
-    },
-    {
-        name: 'usePrettier',
-        type: () => 'toggle',
-        message: 'Add Prettier for code formatting?',
         initial: false,
         active: 'Yes',
         inactive: 'No'

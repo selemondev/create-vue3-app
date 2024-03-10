@@ -9,8 +9,8 @@ import createQuestion from '../../../utils/question';
 async function getVueProperty() {
   const Eslint = packageJsonMap.get('eslintJsVue');
   const EslintTs = packageJsonMap.get('eslintTsPlugin');
-  const Prettier = packageJsonMap.get('prettier');
   const Vitest = packageJsonMap.get('vitest');
+  const TanStackVueQuery = packageJsonMap.get('tanStackVueQuery');
   const Router = packageJsonMap.get('router');
   const Pinia = packageJsonMap.get('pinia');
   const Tailwind = packageJsonMap.get('tailwind');
@@ -25,15 +25,13 @@ async function getVueProperty() {
   
   options.constantProDeps = packageJsonMap.get('constantProDeps')
 
-  options.EslintWithPrettierScript = packageJsonMap.get('eslintWithPrettier')
-
   options.Eslint = options.useTypeScript ? EslintTs : Eslint
-
-  options.Prettier = Prettier
 
   options.Vitest = Vitest
 
   options.Router = Router
+
+  options.TanStackVueQuery = TanStackVueQuery
 
   options.Pinia = Pinia
 

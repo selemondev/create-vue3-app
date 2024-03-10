@@ -12,13 +12,6 @@ const pinia = {
     env: 'pro'
 }
 
-const prettier = {
-    name: 'prettier',
-    version: '^3.1.1',
-    stableVersion: '^3.1.1',
-    env: 'dev'
-}
-
 const eslintJsVue = {
     name: ['eslint-plugin-vue', 'eslint'],
     version: ["^9.17.0", "^8.49.0"],
@@ -49,19 +42,12 @@ const tailwind = {
     env: ['dev', 'dev', 'dev']
 }
 
-const eslintWithPrettier = {
-    name: ['eslint-config-prettier', 'eslint-plugin-prettier'],
-    version: ['^9.1.0', '^5.0.1'],
-    stableVersion: ['^8.5.0', '^4.2.1'],
-    env: 'dev'
-};
-
 const typescript = {
     name: [
         'typescript', 'vue-tsc', '@tsconfig/node20', "@vue/tsconfig", "npm-run-all2", '@types/node'
     ],
-    version: ['^5.3.3', '^1.8.25', "^20.1.2", "^0.5.1", "^6.1.1", "^20.11.10"],
-    stableVersion: ['^5.3.3', '^1.8.25', "^20.1.2", "^0.5.1", "^6.1.1", "^20.11.10"],
+    version: ['~5.3.0', '^1.8.25', "^20.1.2", "^0.5.1", "^6.1.1", "^20.11.10"],
+    stableVersion: ['~5.3.0', '^1.8.25', "^20.1.2", "^0.5.1", "^6.1.1", "^20.11.10"],
     dev: ['dev', 'dev', 'dev', 'dev', 'dev', 'dev', 'dev', 'dev']
 }
 
@@ -71,6 +57,16 @@ const javascript = {
     stableVersion: [],
     dev: []
 };
+
+const tanStackVueQuery = {
+    name: [
+        "@tanstack/vue-query",
+        "@tanstack/vue-query-devtools"
+    ],
+    version: ["^5.25.0", "^5.25.0"],
+    stableVersion: ["^5.25.0", "^5.25.0"],
+    dev: ['pro', 'pro']
+}
 
 const vitest = {
     name: ['vitest', 'jsdom', "@vue/test-utils"],
@@ -94,14 +90,13 @@ const constantProDeps = {
 export {
     constantDevDeps,
     constantProDeps,
-    eslintWithPrettier,
     tailwind,
     eslintTsPlugin,
     javascript,
     typescript,
     vitest,
+    tanStackVueQuery,
     eslintJsVue,
-    prettier,
     pinia,
     router
 }

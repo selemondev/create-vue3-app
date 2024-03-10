@@ -8,35 +8,35 @@ async function installDeps() {
   // No output will be shown in the console
   const cmdIgnore = createSpawnCmd(options.dest, 'ignore')
 
-  // Output will be shown in the console 
-
-  const cmdInherit = createSpawnCmd(options.dest, 'inherit');
-
   const spinner = ora('Copying template...').start();
 
-  const startTime: number = new Date().getTime()
+  const startTime: number = new Date().getTime();
+
+  if(options.useGitInit ) {
+    await cmdIgnore('git', ['init'])
+  
+    await cmdIgnore('git', ['add .'])
+  
+    await cmdIgnore('git', ['commit -m "Initialized by create-vue-next"'])
+    }
 
 
-  await cmdIgnore('git', ['init'])
-
-  await cmdIgnore('git', ['add .'])
-
-  await cmdIgnore('git', ['commit -m "Initialize by create-vue-next"'])
-
-
-  if (options.package !== 'none') {
+  if (options.package && options.package !== 'none') {
     spinner.text = chalk.cyan(`Installing dependencies with ${options.package}. Please wait...`);
 
-    await cmdInherit(options.package, ['install'])
+    await cmdIgnore(options.package, ['install']);
   }
+
+  spinner.stop();
 
   const endTime: number = new Date().getTime()
   const usageTime: number = (endTime - startTime) / 1000
-  logger.info(
-    `Completed in ${usageTime}s ⚡`
-  );
 
-  spinner.stop();
+  console.log()
+
+  logger.info(
+    `Completed in ${usageTime}s`
+  );
 
   console.log()
 

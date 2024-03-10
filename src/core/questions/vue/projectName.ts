@@ -22,8 +22,7 @@ const packageName = [
     },
     {
         name: 'overwrite',
-        //@ts-ignore
-        type: () => (emptyDirName(options.name) ? null : 'confirm'),
+        type: () => (options.name && emptyDirName(options.name) ? null : 'confirm'),
         message: () => {
             return `Directory "${options.name}" is not empty. Do you want to overwrite it?`
         }

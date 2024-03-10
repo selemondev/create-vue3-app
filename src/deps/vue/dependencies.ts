@@ -6,9 +6,9 @@ const router = {
     env: 'pro'
 }
 const pinia = {
-    name: ['pinia', 'pinia-plugin-persistedstate'],
-    version: ['^2.1.7', '^3.2.1'],
-    stableVersion: ['2.1.7', '^3.2.1'],
+    name: 'pinia',
+    version: '^2.1.7',
+    stableVersion: '2.1.7',
     env: 'pro'
 }
 
@@ -19,22 +19,23 @@ const prettier = {
     env: 'dev'
 }
 
-const eslintVue = {
-    name: 'eslint-plugin-vue',
-    version: '^9.19.2',
-    stableVersion: '^9.19.2',
-    env: 'dev'
+const eslintJsVue = {
+    name: ['eslint-plugin-vue', 'eslint'],
+    version: ["^9.17.0", "^8.49.0"],
+    stableVersion: ["^9.17.0", "^8.49.0"],
+    env: ['dev', 'dev']
 }
 
-const eslintPlugin = {
+const eslintTsPlugin = {
     name: [
         'eslint',
-        '@typescript-eslint/eslint-plugin',
-        '@typescript-eslint/parser'
+        'eslint-plugin-vue',
+        "@vue/eslint-config-typescript",
+        "@rushstack/eslint-patch"
     ],
-    version: ['^8.56.0', '^6.14.0', '^6.14.0'],
-    stableVersion: ['^8.18.0', '^5.55.0', '^5.55.0'],
-    env: ['dev', 'dev', 'dev']
+    version: ["^8.49.0", "^9.17.0", "^12.0.0", "^1.3.3"],
+    stableVersion: ['^8.18.0', "^9.17.0", "^12.0.0", "^1.3.3"],
+    env: ['dev', 'dev', 'dev', 'dev']
 }
 
 const tailwind = {
@@ -74,13 +75,13 @@ const javascript = {
 const constantDevDeps = {
     name: options.useTypeScript ? typescript.name : javascript.name,
     version: options.useTypeScript ? typescript.version : javascript.version,
-    stableVersion: options.useTypeScript ? typescript.stableVersion : javascript.stableVersion ,
+    stableVersion: options.useTypeScript ? typescript.stableVersion : javascript.stableVersion,
     dev: options.useTypeScript ? typescript.dev : javascript.dev
 }
 const constantProDeps = {
     name: ['vue'],
-    version: ['^3.3.12'],
-    stableVersion: ['^3.2.45'],
+    version: ['^3.4.15'],
+    stableVersion: ['^3.4.15'],
     dev: ['pro']
 }
 export {
@@ -88,10 +89,10 @@ export {
     constantProDeps,
     eslintWithPrettier,
     tailwind,
-    eslintPlugin,
+    eslintTsPlugin,
     javascript,
     typescript,
-    eslintVue,
+    eslintJsVue,
     prettier,
     pinia,
     router

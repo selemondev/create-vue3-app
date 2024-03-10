@@ -1,16 +1,26 @@
 import * as dependencies from '../../../deps/vue/dependencies'
-const packageJsonMap = new Map()
-Object.keys(dependencies).forEach((item) => {
-  if (Array.isArray(dependencies[item].name)) {
+interface Dependency {
+  name: string | string[],
+  version: string | string[]
+};
+
+interface Dependencies {
+  [key: string]: Dependency
+}
+const packageJsonMap = new Map();
+const deps: Dependencies = dependencies;
+Object.keys(deps).forEach((item: string) => {
+  const name = deps[item].name;
+  if (Array.isArray(name)) {
     let res = ''
-    dependencies[item].name.forEach((cur, index) => {
-      res += `"${cur}":"${dependencies[item].version[index]}",`
+    name.forEach((cur: string, index: number) => {
+      res += `"${cur}":"${deps[item].version[index]}",`
     })
     packageJsonMap.set(item, res)
   } else {
     packageJsonMap.set(
       item,
-      `"${dependencies[item].name}":"${dependencies[item].version}",`
+      `"${deps[item].name}":"${deps[item].version}",`
     )
   }
 })

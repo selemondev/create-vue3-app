@@ -14,11 +14,13 @@ interface Options {
     allPackages?: any[]
     package?: 'bun' | 'pnpm' | 'npm' | 'yarn' | 'none'
     useEslint?: boolean
+    useEslintTs?: boolean
     usePrettier?: boolean
     useRouter?: boolean
     useTailwind?: boolean
     useTypeScript?: boolean
     useJavaScript?: boolean
+    useGitInit?: boolean
     usePinia?: boolean
     EslintScript?: string
     PrettierScript?: string

@@ -14,11 +14,11 @@ async function copyTemplate() {
     const __dirname = dirname(__filename);
     const spinner = ora('Copying template...').start();
 
-    const language = options.useTypeScript ? 'vue-ts' : 'vue-js'
+    const language = options.useTypeScript ? 'vue-ts' : 'vue-js';
 
     options.src = path.resolve(__dirname, `../template/${language}`);
 
-    const dest = path.resolve(process.cwd(), options.name)
+    const dest = options.name && path.resolve(process.cwd(), options.name)
     
     options.dest = dest
 
@@ -31,22 +31,25 @@ async function copyTemplate() {
     const filterFileFn = getFilterFile()
 
     async function copy() {
-        const targetDirectory = path.resolve(__dirname, '../../../../');
+        const targetDirectory = path.resolve(__dirname, '../');
+        if(!dest) {
+            return;
+        };
         await fs.copy(`${targetDirectory}/template/${language}`, dest)
     }
     await copy()
-    await filterFileFn()
+    filterFileFn && await filterFileFn()
 
-    await fs.move(
+    options.dest && await fs.move(
         path.resolve(options.dest, '.gitignore.ejs'),
         path.resolve(options.dest, '.gitignore'),
         { overwrite: true }
-    )
+    );
 
-    await Promise.all(
+   await Promise.all(
         templateFilesMap
             .get('vue')()
-            .map((file: string) => ejsRender(file, options.name))
+            .map((file: string) => options.name && ejsRender(file, options.name))
     )
     spinner.text = chalk.green('Template successfully copied!')
     spinner.succeed()

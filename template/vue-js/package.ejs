@@ -13,9 +13,6 @@
     <% if (useVitest) { -%>
     <%- VitestScript %>
     <% } -%>
-    <% if (usePrettier) { -%>
-    <%- PrettierScript %>
-    <% } -%>
     <% if (useTypeScript) { -%>
     <%- TypeScriptScript %>
     <% } -%>
@@ -28,6 +25,9 @@
     <% if (usePinia) { -%>
     <%- Pinia %>
     <% } -%>
+    <% if (useTanStackVueQuery) { -%>
+    <%- TanStackVueQuery %>
+    <% } -%>
   },
   "devDependencies": {
     <% if (useTypeScript) { -%>
@@ -36,14 +36,8 @@
     <% if (useEslint) { -%>
       <%- Eslint %>
     <% } -%>
-    <% if (usePrettier) { -%>
-      <%- Prettier %>
-    <% } -%>
     <% if (useTailwind) { -%>
       <%- Tailwind %>
-    <% } -%>
-    <% if (usePrettier && useEslint) { -%>
-      <%- EslintWithPrettierScript %>
     <% } -%>
     <% if (useJavaScript) { -%>
       <%- JavaScript %>

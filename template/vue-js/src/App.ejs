@@ -4,6 +4,10 @@
       -%>
     import HomeView from '@/views/HomeView.vue'
     <% } -%>
+    <% if (useTanStackVueQuery) {
+      -%>
+      import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
+    <% } -%>
   </script>
   <% } -%>
 
@@ -24,6 +28,9 @@
               <% if (useRouter) { -%>
                 <RouterView />
                 <% } -%>
+                <% if (useTanStackVueQuery) { -%>
+                  <VueQueryDevtools />
+                  <% } -%>
         </template>
 
         <style>

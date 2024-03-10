@@ -4,7 +4,7 @@ import options from '../../../core/utils/vue/options'
 import { ejsRender } from '../../../utils/ejsRender'
 import chalk from "chalk"
 import { templateFilesMap } from '../../../core/utils/vue/templateFile'
-import { getFilterFile } from '../../../compile/common/frameQuestions'
+import { getFilterFile } from '../../../filter/filterFiles'
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 import ora from 'ora'

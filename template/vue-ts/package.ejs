@@ -2,6 +2,9 @@
   "name": "vite-template",
   "private": true,
   "version": "1.0.0",
+  <% if (package === 'pnpm') { -%>
+    "packageManager": "pnpm@8.15.4",
+  <% } -%>
   "type": "module",
   "scripts": {
     "dev": "vite",

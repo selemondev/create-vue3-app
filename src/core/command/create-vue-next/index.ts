@@ -7,12 +7,12 @@ async function createProject() {
   await initialLog()
   await createVueQuestions()
   await copyTemplate()
-  await installDeps()
+  await installDeps();
 }
 
 export default async function createVueNext() {
   program
-    .description('init Vue3 + Vite3 + Typescript project   📑  📑')
+    .description(`Create Vue Next. The Next Generation Vue Scaffolding Tool ⚡`)
     .action(async () => {
       createProject()
     })

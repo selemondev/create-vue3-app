@@ -4,7 +4,7 @@ import program from './core/program'
 import createVueNext from './core/command/create-vue-next';
 
 async function createViteCliCommand() {
-      await createVueNext()
+      await createVueNext();
       program.parse(process.argv);
 }
 createViteCliCommand()

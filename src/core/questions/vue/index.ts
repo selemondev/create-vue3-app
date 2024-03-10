@@ -4,7 +4,7 @@ import {
   lintMap,
   packageJsonMap,
 } from '../../utils/vue/ejsMapConstant'
-import createQuestion from '../../../utils/question';
+import createQuestion from './createQuestion';
 
 async function getVueProperty() {
   const Eslint = packageJsonMap.get('eslintJsVue');

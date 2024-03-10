@@ -14,6 +14,7 @@ interface Options {
     dest?: string
     allPackages?: any[]
     package?: 'bun' | 'pnpm' | 'npm' | 'yarn' | 'none'
+    deploy?: 'netlify' | 'vercel' | 'none',
     useEslint?: boolean
     useEslintTs?: boolean
     useRouter?: boolean

@@ -18,13 +18,12 @@ export default async function createVueNext() {
     .version(packageJson.version)
     .description(`Create Vue Next. The Next Generation Vue Scaffolding Tool ⚡`)
     .action((name: string) => {
-      options.name = name.trim()
+      options.name = name.trim();
     })
     .option(
       '--ts, --typescript',
       `
 
-    
     Initialize as a TypeScript project.
   `
     )
@@ -32,14 +31,12 @@ export default async function createVueNext() {
       '--js, --javascript',
       `
 
-    
     Initialize as a JavaScript project.
   `
     )
     .option(
       '--tailwind',
       `
-    
     
     Initialize with Tailwind CSS config. (default)
   `

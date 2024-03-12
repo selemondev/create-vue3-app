@@ -11,16 +11,19 @@ export default {
   choices: [
     { title: 'I prefer manual installation', value: 'none' },
     {
-        title: isBunInstalled ? 'Bun' : 'Bun not installed',
-        value: 'bun'
+        title: isBunInstalled ? 'Bun' : 'Bun is not installed',
+        value: 'bun',
+        disabled: isBunInstalled ? false : true
     },
     {
-      title: isPnpmInstalled ? 'Pnpm' : 'Pnpm not installed',
-      value: 'pnpm'
+      title: isPnpmInstalled ? 'Pnpm' : 'Pnpm is not installed',
+      value: 'pnpm',
+      disabled: isPnpmInstalled ? false : true
     },
     {
-      title: isYarnInstalled ? 'Yarn' : 'Yarn not installed',
-      value: 'yarn'
+      title: isYarnInstalled ? 'Yarn' : 'Yarn is not installed',
+      value: 'yarn',
+      disabled: isYarnInstalled ? false : true
     },
     { title: 'Npm', value: 'npm' }
   ]

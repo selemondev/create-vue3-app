@@ -11,7 +11,9 @@ import ora from 'ora'
 
 async function copyTemplate() {
     const __filename = fileURLToPath(import.meta.url);
+
     const __dirname = dirname(__filename);
+
     const spinner = ora('Copying template...').start();
 
     const language = options.useTypeScript ? 'vue-ts' : 'vue-js';
@@ -37,8 +39,9 @@ async function copyTemplate() {
         };
         await fs.copy(`${targetDirectory}/template/${language}`, dest)
     }
-    await copy()
-    filterFileFn && await filterFileFn()
+    await copy();
+
+    filterFileFn && await filterFileFn();
 
     options.dest && await fs.move(
         path.resolve(options.dest, '.gitignore.ejs'),
@@ -51,7 +54,8 @@ async function copyTemplate() {
             .get('vue')()
             .map((file: string) => options.name && ejsRender(file, options.name))
     )
-    spinner.text = chalk.green('Template successfully copied!')
+    spinner.text = chalk.green('Template successfully copied!');
+    
     spinner.succeed()
 }
 export default copyTemplate

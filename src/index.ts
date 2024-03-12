@@ -2,146 +2,73 @@
 
 import program from './core/program'
 import createVueNext from './core/command/create-vue-next';
+import packageJson from "../package.json"
+import options from './core/utils/vue/options';
 
-async function createViteCliCommand() {
-      await createVueNext();
-      program.parse(process.argv);
+async function main() {
+      program
+            .arguments('<project-name>')
+            .version(packageJson.version)
+            .description(`Create Vue Next. The Next Generation Vue Scaffolding Tool ⚡`)
+            .action((name: string) => {
+                  options.name = name.trim();
+            })
+            .option(
+                  '--ts, --typescript',
+                  `
+  
+      Initialize as a TypeScript project.
+    `
+            )
+            .option(
+                  '--tailwind',
+                  `
+      
+      Initialize with Tailwind CSS config. (default)
+    `
+            )
+            .option(
+                  '--eslint',
+                  `
+  
+      Initialize with eslint config.
+    `
+            )
+            .option(
+                  '--use-npm',
+                  `
+    
+      Explicitly tell the CLI to bootstrap the application using npm
+    `
+            )
+            .option(
+                  '--use-pnpm',
+                  `
+    
+      Explicitly tell the CLI to bootstrap the application using pnpm
+    `
+            )
+            .option(
+                  '--use-yarn',
+                  `
+    
+      Explicitly tell the CLI to bootstrap the application using Yarn
+    `
+            )
+            .option(
+                  '--use-bun',
+                  `
+    
+      Explicitly tell the CLI to bootstrap the application using Bun
+    `
+            )
+            .allowUnknownOption()
+            .parse(process.argv);
+            options.useTypeScript = program.opts().typescript;
+            options.useTailwind = program.opts().tailwind;
+            options.useEslint = program.opts().eslint;
+            options.package = !!program.opts().useNpm ? 'npm' : !!program.opts().usePnpm ? 'pnpm' : !!program.opts().useYarn ? 'yarn' : !!program.opts().useBun ? 'bun' : options.package;
+            await createVueNext();
+
 }
-createViteCliCommand()
-
-
-
-// import options from "./compile/vue/options";
-// import { getPackageManager } from "./utils/getPackageManager";
-// import prompts from 'prompts';
-// import { onPromptState } from "./utils/getOnPromptState";
-// import { isValidProjectName } from "./utils/getValidProjectName";
-// import viteCliCoreCommand from './core/command'
-// import { logger } from './utils/logger';
-// import Conf from "conf";
-// import program from "./core/program";
-
-
-// const PackageManager = !!program.useNpm ? 'npm' : !!program.usePnpm ? 'pnpm' : !!program.useYarn ? 'yarn' : !!program.useBun ? 'bun' : getPackageManager()
-
-// let projectName = '';
-
-// const handleSigTerm = () => process.exit(0);
-
-// process.on('SIGINT', handleSigTerm);
-// process.on('SIGTERM', handleSigTerm)
-
-// async function run(): Promise<void> {
-
-//     // console.clear();
-
-//     // logger.info('Welcome To Create Vue Next. The Next Generation Vue Scaffolding Tool ✨');
-
-//     // console.log();
-
-//     await viteCliCoreCommand()
-
-
-//     // const conf = new Conf({ projectName: 'create-vue-next' });
-
-//     // if (typeof projectName === 'string') {
-//     //     projectName = projectName.trim();
-//     //     options.name = projectName;
-//     // };
-
-//     // if (program.args[0]) {
-//     //     const isProjectNameValid = isValidProjectName(program.args[0]);
-
-//     //     if (isProjectNameValid.valid) {
-//     //         projectName = program.args[0];
-//     //         options.name = projectName;
-//     //     } else {
-//     //         logger.error(`Invalid project name. Could not create a project called ${program.args[0]} because of npm naming restrictions:`);
-//     //         process.exit(1);
-//     //     }
-
-//     // }
-
-//     // if (!projectName) {
-//     //     const { name } = await prompts({
-//     //         onState: onPromptState,
-//     //         type: 'text',
-//     //         name: 'name',
-//     //         initial: 'create-vue-next',
-//     //         message: 'What should we call your project?',
-//     //         validate: (value) => {
-//     //             const isProjectNameValid = isValidProjectName(value);
-
-//     //             if (isProjectNameValid.valid) {
-//     //                 return true;
-//     //             }
-//     //             return 'Invalid project name'
-//     //         },
-//     //     });
-
-//     //     projectName = name;
-//     // }
-
-//     // if (!options.name) {
-//     //     logger.error('Please provide the project name')
-//     // }
-
-//     // const response = await prompts([
-//     //     {
-//     //         onState: onPromptState,
-//     //         type: 'text',
-//     //         name: 'name',
-//     //         initial: 'create-react-next',
-//     //         message: 'What should we call your project?',
-//     //         validate: (value) => {
-//     //             const isProjectNameValid = isValidProjectName(value);
-
-//     //             if (isProjectNameValid.valid) {
-//     //                 return true;
-//     //             }
-//     //             return 'Invalid project name'
-//     //         },
-//     //     },
-
-//     //     {
-//     //         type: prev => prev && 'toggle',
-//     //         name: 'tailwind',
-//     //         initial: true,
-//     //         active: 'yes',
-//     //         inactive: 'no',
-//     //         message: 'Add TailwindCss?',
-//     //     },
-
-//     //     {
-//     //         type: prev => prev && 'toggle',
-//     //         name: 'typescript',
-//     //         initial: true,
-//     //         active: 'yes',
-//     //         inactive: 'no',
-//     //         message: 'Add TypeScript?',
-//     //     },
-
-
-//     //     {
-//     //         type: prev => prev && 'toggle',
-//     //         name: 'pinia',
-//     //         initial: false,
-//     //         active: 'yes',
-//     //         inactive: 'no',
-//     //         message: 'Add Pinia?',
-//     //     },
-
-//     //     {
-//     //         type: prev => prev && 'toggle',
-//     //         name: 'router',
-//     //         initial: true,
-//     //         active: 'yes',
-//     //         inactive: 'no',
-//     //         message: 'Add Vue Router?',
-//     //     },
-//     // ]);
-
-//     console.log();
-// }
-
-// run();
+main();

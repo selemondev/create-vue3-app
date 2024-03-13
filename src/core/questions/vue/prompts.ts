@@ -26,6 +26,15 @@ const prompt = [
     },
 
     {
+        name: 'useDevTool',
+        type: () => 'toggle',
+        message: 'Add Vue DevTools to enhance the development experience?',
+        initial: false,
+        active: 'Yes',
+        inactive: 'No'
+    },
+
+    {
         name: 'useVitest',
         type: () => 'toggle',
         message: 'Add Vitest for unit testing?',

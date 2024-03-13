@@ -68,6 +68,13 @@ const tanStackVueQuery = {
     dev: ['pro', 'pro']
 }
 
+const devTool = {
+    name: 'vite-plugin-vue-devtools',
+    version: '^7.0.16',
+    stableVersion: '^7.0.16',
+    dev: 'pro'
+}
+
 const vitest = {
     name: ['vitest', 'jsdom', "@vue/test-utils"],
     version: ["^1.2.2", "^24.0.0", "^2.4.4"],
@@ -90,6 +97,7 @@ const constantProDeps = {
 export {
     constantDevDeps,
     constantProDeps,
+    devTool,
     tailwind,
     eslintTsPlugin,
     javascript,

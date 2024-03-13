@@ -5,6 +5,7 @@ interface Options {
     TypeScript?: string
     JavaScript?: string
     Pinia?: string
+    DevTool?: string
     Eslint?: string
     Vitest?: string
     TanStackVueQuery?: string
@@ -24,6 +25,7 @@ interface Options {
     useJavaScript?: boolean
     useTanStackVueQuery?: string
     useVitest?: string
+    useDevTool?: boolean
     useGitInit?: boolean
     usePinia?: boolean
     EslintScript?: string

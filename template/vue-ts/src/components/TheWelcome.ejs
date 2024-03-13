@@ -1,0 +1,25 @@
+<script setup lang='ts'>
+
+</script>
+<template>
+    <% if (useTailwind) { -%>
+  Tailwind
+        <% } -%>
+        <% if (useRouter) { -%>
+            Router
+                  <% } -%>
+                  <% if (usePinia) { -%>
+                    Pinia
+                          <% } -%>
+                          <% if (useEslint) { -%>
+                            Eslint
+                                  <% } -%>
+
+                                  <% if (useVitest) { -%>
+                                    Vitest
+                                          <% } -%>
+
+                                          <% if (useDevTool) { -%>
+                                            DevTools
+                                                  <% } -%>
+</template>

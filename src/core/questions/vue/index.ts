@@ -16,6 +16,7 @@ async function getVueProperty() {
   const Tailwind = packageJsonMap.get('tailwind');
   const TypeScript = packageJsonMap.get('typescript');
   const JavaScript = packageJsonMap.get('javascript');
+  const DevTool = packageJsonMap.get('devTool');
 
   resolveOptions(options, packageJsonMap)
 
@@ -28,6 +29,8 @@ async function getVueProperty() {
   options.Eslint = options.useTypeScript ? EslintTs : Eslint
 
   options.Vitest = Vitest
+
+  options.DevTool = DevTool;
 
   options.Router = Router
 

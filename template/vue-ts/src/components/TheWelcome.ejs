@@ -8,7 +8,7 @@
         "An approachable, performant and versatile framework for building web user interfaces.",
       link: 'https://vuejs.org/'
     },
-  
+
     {
       id: 2,
       name: "Pinia",
@@ -17,7 +17,7 @@
         "The intuitive store that is type safe, extensible, and modular by design.",
       link: 'https://pinia.vuejs.org/'
     },
-  
+
     {
       id: 3,
       name: "Vue Router",
@@ -26,7 +26,7 @@
         "The expressive, configurable and convenient routing for Vue.js applications.",
       link: 'https://router.vuejs.org/'
     },
-  
+
     {
       id: 4,
       name: "Eslint",
@@ -35,7 +35,7 @@
         "ESLint is an open source project that statically analyzes your code to quickly find problems.",
       link: 'https://eslint.org/'
     },
-  
+
     {
       id: 5,
       name: "Vitest",
@@ -44,7 +44,7 @@
         "The next generation testing framework powered by Vite. It's fast!",
       link: 'https://vitest.dev/'
     },
-  
+
     {
       id: 6,
       name: "TypeScript",
@@ -102,37 +102,76 @@
       link: 'https://vueuse.org/guide/'
     },
   ];
-  </script>
+</script>
 <template>
-    <% if (useTailwind) { -%>
-      <main class="grid w-full min-h-screen place-items-center">
-        <div class="flex flex-col w-[700px] space-y-6 items-center">
-          <div>
-            <img src="https://api.iconify.design/logos:vue.svg" alt="Vue Logo" class="w-14 h-14" />
+  <% if (useTailwind) { -%>
+    <main class="grid w-full min-h-screen place-items-center">
+      <div class="flex flex-col w-[700px] space-y-6 items-center">
+        <div>
+          <img src="https://api.iconify.design/logos:vue.svg" alt="Vue Logo" class="w-14 h-14" />
+        </div>
+
+        <div>
+          <h2 class="font-sans text-4xl font semibold">
+            Welcome To Create Vue Next
+          </h2>
+        </div>
+
+        <div class="w-full">
+          <div class="grid auto-rows-[185px] place-items-center grid-cols-3 gap-3">
+            <div v-for="pkg in packages " :key="pkg.id">
+              <div
+                class="row-span-1 p-4 cursor-pointer gradient-border rounded-xl border-1 border-slate-400/10 bg-neutral-100 dark:bg-neutral-950">
+                <a :href="pkg.link" target="_blank" class="flex flex-col items-center space-y-3">
+                  <div class="grid w-12 h-12 rounded-md bg-neutral-800 place-items-center">
+                    <img :src="pkg.icon" :alt="pkg.name" class="w-7 h-7" />
+                  </div>
+
+                  <div>
+                    <h2 class="text-lg">{{ pkg.name }}</h2>
+                  </div>
+
+                  <div>
+                    <p class="text-[12px] text-gray-300 text-center">
+                      {{ pkg.description }}
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
-    
-          <div>
-            <h2 class="font-sans text-4xl font semibold">
-              Welcome To Create Vue Next
-            </h2>
-          </div>
-    
-          <div class="w-full">
-            <div class="grid auto-rows-[185px] place-items-center grid-cols-3 gap-3">
-              <div v-for="pkg in packages " :key="pkg.id">
-                <div
-                  class="row-span-1 p-4 cursor-pointer gradient-border rounded-xl border-1 border-slate-400/10 bg-neutral-100 dark:bg-neutral-950">
-                  <a :href="pkg.link" target="_blank" class="flex flex-col items-center space-y-3">
-                    <div class="grid w-12 h-12 rounded-md bg-neutral-800 place-items-center">
-                      <img :src="pkg.icon" :alt="pkg.name" class="w-7 h-7" />
+        </div>
+      </div>
+    </main>
+    <% } -%>
+
+      <% if (!useTailwind) { -%>
+        <main class="grid-container">
+          <div class="flex-container">
+            <div>
+              <img src="https://api.iconify.design/logos:vue.svg" alt="Vue Logo" class="logo" />
+            </div>
+      
+            <div>
+              <h2 class="title">
+                Welcome To Create Vue Next
+              </h2>
+            </div>
+      
+            <div class="grid-wrapper">
+              <div class="package gradient-border" v-for="pkg in packages" :key="pkg.id">
+                <div class="package-inner">
+                  <a :href="pkg.link" target="_blank" class="package-link">
+                    <div class="icon-wrapper">
+                      <img :src="pkg.icon" :alt="pkg.name" class="icon" />
                     </div>
-    
+      
                     <div>
-                      <h2 class="text-lg">{{ pkg.name }}</h2>
+                      <h2 class="package-name">{{ pkg.name }}</h2>
                     </div>
-    
+      
                     <div>
-                      <p class="text-[12px] text-gray-300 text-center">
+                      <p class="description">
                         {{ pkg.description }}
                       </p>
                     </div>
@@ -141,7 +180,103 @@
               </div>
             </div>
           </div>
-        </div>
-      </main>
-              <% } -%>
+        </main>
+        <% } -%>
+
 </template>
+
+<% if (!useTailwind) { -%>
+
+  <style scoped>
+    .grid-container {
+      display: grid;
+      width: 100%;
+      min-height: 100vh;
+      padding: 10px 0;
+      place-items: center;
+    }
+    
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+      width: 700px;
+      gap: 15px;
+      align-items: center;
+    }
+    
+    .logo {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+    
+    .title {
+      font-size: 2.25rem;
+      font-weight: 400;
+      line-height: 40px;
+      color: #fff;
+    }
+    
+    .grid-wrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px 16px;
+      margin-top: 10px;
+    }
+    
+    .package-name {
+      color: #fff;
+    }
+    
+    .package {
+      padding: 16px 18px;
+      cursor: pointer;
+      background-color: #0A0A0A;
+      border-radius: 0.75rem;
+      border: 0.5px solid #1D1D1D;
+    }
+    
+    .package-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .package-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .icon-wrapper {
+      display: grid;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 0.5rem;
+      background-color: #262626;
+      place-items: center;
+    }
+    
+    .icon {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+    
+    .package-name {
+      font-size: 1.125rem;
+      font-weight: 400;
+      line-height: 28px;
+    }
+    
+    .description {
+      font-size: 12.2px;
+      color: #D1D5DB;
+      line-height: 18px;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    </style>
+  <% } -%>

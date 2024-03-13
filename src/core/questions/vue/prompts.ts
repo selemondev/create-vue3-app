@@ -37,7 +37,7 @@ const prompt = [
     {
         name: 'useDevTool',
         type: () => 'toggle',
-        message: 'Add Vue DevTools to enhance the development experience?',
+        message: 'Add Vue DevTools to enhance the development experience? (experimental)',
         initial: false,
         active: 'Yes',
         inactive: 'No'

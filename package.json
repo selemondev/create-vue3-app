@@ -6,14 +6,24 @@
   "type": "module",
   "scripts": {
     "dev": "esno src/index.ts",
-    "build:package": "tsup-node src/index.ts --format esm --clean --minify"
+    "build:package": "tsup-node src/index.ts --format esm --clean --minify",
+    "generate:release": "npx changelogen@latest --release"
   },
   "bin": {
-    "create-vue-next": "dist/index.js"
+    "create-vue-next": "./dist/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "create-vue-next",
+    "Vue CLI",
+    "Vue 3 CLI",
+    "Vite CLI",
+    "Vite",
+    "Vue 3",
+    "VueUse",
+    "TypeScript"
+  ],
+  "author": "Selemondev",
+  "license": "MIT",
   "devDependencies": {
     "@types/ejs": "^3.1.5",
     "@types/fs-extra": "^11.0.4",

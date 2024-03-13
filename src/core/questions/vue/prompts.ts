@@ -17,6 +17,15 @@ const prompt = [
     },
 
     {
+        name: 'useVueUse',
+        type: () => 'toggle',
+        message: 'Add VueUse for a collection of essential Vue composition utilities?',
+        initial: false,
+        active: 'Yes',
+        inactive: 'No'
+    },
+
+    {
         name: 'useTanStackVueQuery',
         type: () => 'toggle',
         message: 'Add TanStack Vue Query for server state management?',

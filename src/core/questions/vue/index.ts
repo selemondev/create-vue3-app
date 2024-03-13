@@ -17,6 +17,7 @@ async function getVueProperty() {
   const TypeScript = packageJsonMap.get('typescript');
   const JavaScript = packageJsonMap.get('javascript');
   const DevTool = packageJsonMap.get('devTool');
+  const VueUse = packageJsonMap.get('vueUse');
 
   resolveOptions(options, packageJsonMap)
 
@@ -37,6 +38,8 @@ async function getVueProperty() {
   options.TanStackVueQuery = TanStackVueQuery
 
   options.Pinia = Pinia
+
+  options.VueUse = VueUse;
 
   options.Tailwind = Tailwind;
 

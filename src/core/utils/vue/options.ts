@@ -4,6 +4,7 @@ interface Options {
     Tailwind?: string
     TypeScript?: string
     JavaScript?: string
+    VueUse?: string
     Pinia?: string
     DevTool?: string
     Eslint?: string
@@ -22,6 +23,7 @@ interface Options {
     useVueQuery?: boolean
     useTailwind?: boolean
     useTypeScript?: boolean
+    useVueUse?: boolean
     useJavaScript?: boolean
     useTanStackVueQuery?: string
     useVitest?: string

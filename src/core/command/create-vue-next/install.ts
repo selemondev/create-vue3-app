@@ -12,13 +12,13 @@ async function installDeps() {
 
   const startTime: number = new Date().getTime();
 
-  if(options.useGitInit ) {
+  if (options.useGitInit) {
     await cmdIgnore('git', ['init'])
-  
+
     await cmdIgnore('git', ['add .'])
-  
+
     await cmdIgnore('git', ['commit -m "Initialized by create-vue-next"'])
-    }
+  }
 
 
   if (options.package && options.package !== 'none') {
@@ -35,12 +35,12 @@ async function installDeps() {
   console.log()
 
   logger.info(
-    `Completed in ${usageTime}s`
+    `🚀 Completed in ${usageTime}s`
   );
 
   console.log()
 
-  logger.success('Project created successfully')
+  logger.success('✅ Project created successfully')
 
   console.log()
 
@@ -52,12 +52,44 @@ async function installDeps() {
     logger.info(
       options.package === 'npm'
         ? `${options.package} run dev to start the dev server`
-        : `${options.package} dev to start the dev server`
+        : `${options.package} dev to start the dev server`,
     )
+    
+    console.log();
+
+    logger.info(options.useEslint && options.package === 'npm'
+      ? `${options.package} run lint`
+      : `${options.package} lint`)
+
+    console.log()
+
+    logger.info(options.useVitest && options.package === 'npm'
+      ? `${options.package} run test:unit`
+      : `${options.package} test:unit`);
+
+    console.log()
+
+    logger.info(options.useTypeScript && options.package === 'npm'
+      ? `${options.package} run type-check`
+      : `${options.package} type-check`)
+
+
   } else {
     logger.info(`npm install`)
 
     console.log()
+
+    options.useEslint && logger.info('npm run lint')
+
+    options.useEslint && console.log()
+
+    options.useTypeScript && logger.info("npm run type-check")
+
+    options.useTypeScript && console.log()
+
+    options.useVitest && logger.info('npm run test:unit')
+
+    options.useVitest && console.log()
 
     logger.info('npm run dev')
   }

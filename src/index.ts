@@ -58,7 +58,7 @@ async function main() {
             .option(
                   '--use-bun',
                   `
-    
+
       Explicitly tell the CLI to bootstrap the application using Bun
     `
             )

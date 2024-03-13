@@ -40,6 +40,13 @@ const tailwind = {
     version: ['^3.4.1', '^8.4.35', '^10.4.18'],
     stableVersion: ['^3.4.1', '^8.4.35', '^10.4.18'],
     env: ['dev', 'dev', 'dev']
+};
+
+const vueUse = {
+    name: '@vueuse/core',
+    version: '^10.9.0',
+    stableVersion: '^10.9.0',
+    env: 'pro'
 }
 
 const typescript = {
@@ -105,6 +112,7 @@ export {
     vitest,
     tanStackVueQuery,
     eslintJsVue,
+    vueUse,
     pinia,
     router
 }

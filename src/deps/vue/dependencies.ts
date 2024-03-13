@@ -1,8 +1,8 @@
 import options from '../../core/utils/vue/options'
 const router = {
     name: 'vue-router',
-    version: '^4.2.5',
-    stableVersion: '4.2.4',
+    version: '^4.3.0',
+    stableVersion: '4.3.0',
     env: 'pro'
 }
 const pinia = {
@@ -96,10 +96,10 @@ const constantDevDeps = {
     dev: options.useTypeScript ? typescript.dev : javascript.dev
 }
 const constantProDeps = {
-    name: ['vue'],
-    version: ['^3.4.15'],
-    stableVersion: ['^3.4.15'],
-    dev: ['pro']
+    name: 'vue',
+    version: '^3.4.21',
+    stableVersion: '^3.4.21',
+    dev: 'pro'
 }
 export {
     constantDevDeps,

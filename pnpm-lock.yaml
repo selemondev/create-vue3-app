@@ -25,9 +25,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.11.24
     version: 20.11.24
-  '@types/ora':
-    specifier: ^3.2.0
-    version: 3.2.0
+  '@types/prompts':
+    specifier: ^2.4.9
+    version: 2.4.9
   '@types/validate-npm-package-name':
     specifier: ^4.0.2
     version: 4.0.2
@@ -469,11 +469,11 @@ packages:
       undici-types: 5.26.5
     dev: true
 
-  /@types/ora@3.2.0:
-    resolution: {integrity: sha512-jll99xUKpiFbIFZSQcxm4numfsLaOWBzWNaRk3PvTSE7BPqTzzOCFmS0mQ7m8qkTfmYhuYbehTGsxkvRLPC++w==}
-    deprecated: This is a stub types definition. ora provides its own type definitions, so you do not need this installed.
+  /@types/prompts@2.4.9:
+    resolution: {integrity: sha512-qTxFi6Buiu8+50/+3DGIWLHM6QuWsEKugJnnP6iv2Mc4ncxE4A/OJkjuVOA+5X0X1S/nq5VJRa8Lu+nwcvbrKA==}
     dependencies:
-      ora: 8.0.1
+      '@types/node': 20.11.24
+      kleur: 3.0.3
     dev: true
 
   /@types/validate-npm-package-name@4.0.2:

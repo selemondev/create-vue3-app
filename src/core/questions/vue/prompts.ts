@@ -3,7 +3,7 @@ const prompt = [
         name: 'useRouter',
         type: () => 'toggle',
         message: 'Add Vue Router for Single Page Application development?',
-        initial: false,
+        initial: true,
         active: 'Yes',
         inactive: 'No'
     },
@@ -11,7 +11,7 @@ const prompt = [
         name: 'usePinia',
         type: () => 'toggle',
         message: 'Add Pinia for state management?',
-        initial: false,
+        initial: true,
         active: 'Yes',
         inactive: 'No'
     },
@@ -29,7 +29,7 @@ const prompt = [
         name: 'useTanStackVueQuery',
         type: () => 'toggle',
         message: 'Add TanStack Vue Query for server state management?',
-        initial: false,
+        initial: true,
         active: 'Yes',
         inactive: 'No'
     },
@@ -38,7 +38,7 @@ const prompt = [
         name: 'useDevTool',
         type: () => 'toggle',
         message: 'Add Vue DevTools to enhance the development experience? (experimental)',
-        initial: false,
+        initial: true,
         active: 'Yes',
         inactive: 'No'
     },
@@ -47,7 +47,7 @@ const prompt = [
         name: 'useVitest',
         type: () => 'toggle',
         message: 'Add Vitest for unit testing?',
-        initial: false,
+        initial: true,
         active: 'Yes',
         inactive: 'No'
     }

@@ -3,7 +3,7 @@ const tailwindPrompt = [
         name: 'useTailwind',
         type: () => 'toggle',
         message: 'Add TailwindCSS for styling?',
-        initial: false,
+        initial: true,
         active: 'Yes',
         inactive: 'No'
     }

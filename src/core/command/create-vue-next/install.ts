@@ -54,44 +54,38 @@ async function installDeps() {
         ? `${options.package} run dev to start the dev server`
         : `${options.package} dev to start the dev server`,
     )
-    
-    console.log();
+
+    console.log()
 
     logger.info(options.useEslint && options.package === 'npm'
       ? `${options.package} run lint`
       : `${options.package} lint`)
 
-    console.log()
+    options.useEslint && console.log()
 
-    logger.info(options.useVitest && options.package === 'npm'
-      ? `${options.package} run test:unit`
-      : `${options.package} test:unit`);
+    options.useVitest && logger.info(`${options.package} run test:unit to run tests`);
+  
+    options.useTypeScript && console.log()
 
-    console.log()
-
-    logger.info(options.useTypeScript && options.package === 'npm'
-      ? `${options.package} run type-check`
-      : `${options.package} type-check`)
+    options.useTypeScript && logger.info(`${options.package} run type-check`);
 
 
   } else {
-    logger.info(`npm install`)
+    logger.info(`npm install - To install dependencies`)
 
     console.log()
 
-    options.useEslint && logger.info('npm run lint')
+    options.useEslint && logger.info('npm run lint to format your code')
 
     options.useEslint && console.log()
 
-    options.useTypeScript && logger.info("npm run type-check")
-
-    options.useTypeScript && console.log()
-
-    options.useVitest && logger.info('npm run test:unit')
+    logger.info('npm run dev to start the dev server')
 
     options.useVitest && console.log()
 
-    logger.info('npm run dev')
+    options.useVitest && logger.info('npm run test:unit to run tests')
+
+    options.useTypeScript && logger.info("npm run type-check")
   }
 }
 export default installDeps

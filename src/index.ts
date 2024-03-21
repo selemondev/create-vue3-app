@@ -7,11 +7,10 @@ import options from './core/utils/vue/options';
 
 async function main() {
       program
-            .arguments('<project-name>')
             .version(packageJson.version)
             .description(`Create Vue Next. The Next Generation Vue Scaffolding Tool ⚡`)
             .action((name: string) => {
-                  options.name = name.trim();
+                  options.name = name;
             })
             .option(
                   '--ts, --typescript',

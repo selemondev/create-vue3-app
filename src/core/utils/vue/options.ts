@@ -1,4 +1,4 @@
-interface Options {
+export interface Options {
     templatePath?: string
     Router?: string
     Tailwind?: string

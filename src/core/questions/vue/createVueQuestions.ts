@@ -9,11 +9,11 @@ import options from '../../utils/vue/options'
 import tailwindPrompt from "./tailwind";
 import typeScriptPrompt from "./typescript";
 import eslintPrompt from "./eslint"
+import program from '../../program'
 async function createVueQuestions(): Promise<void> {
   try {
-    if(!options.name) {
-      await createQuestion(projectName)
-    }
+    options.name = program.args[0] ?? (await createQuestion(projectName)).name;
+
     if(!options.useTypeScript) {
       await createQuestion(typeScriptPrompt)
     }

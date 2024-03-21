@@ -3,7 +3,7 @@ const eslintPrompt = [
         name: 'useEslint',
         type: () => 'toggle',
         message: 'Add ESLint for code quality?',
-        initial: true,
+        initial: false,
         active: 'Yes',
         inactive: 'No'
     }

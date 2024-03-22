@@ -10,9 +10,3 @@ lib-cov
 logs
 node_modules
 temp
-
-**package-lock.json
-**package-lock.json
-**yarn.lock
-**pnpm-lock.yaml
-**yarn-lock.yaml

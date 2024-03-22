@@ -1,6 +1,6 @@
 {
   "name": "create-vue-next",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The Next Generation Vue Scaffolding Tool ✨",
   "type": "module",
   "main": "./dist/index.cjs",

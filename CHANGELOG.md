@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.2
+
+[compare changes](https://github.com/selemondev/create-vue-next/compare/v0.0.1...v0.0.2)
+
+### 📖 Documentation
+
+- Update docs ([169b8fd](https://github.com/selemondev/create-vue-next/commit/169b8fd))
+
+### ❤️ Contributors
+
+- Selemondev <selemondev19@gmail.com>
+
 ## v0.0.1
 
 

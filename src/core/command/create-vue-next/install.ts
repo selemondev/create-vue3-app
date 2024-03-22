@@ -57,7 +57,7 @@ async function installDeps() {
 
     console.log()
 
-    logger.info(options.useEslint && options.package === 'npm'
+    options.useEslint && logger.info(options.package === 'npm'
       ? `${options.package} run lint`
       : `${options.package} lint`)
 

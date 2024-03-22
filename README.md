@@ -1,5 +1,5 @@
 <p align="center">
- <img align="center" src="https://raw.githubusercontent.com/selemondev/create-vue-next/master/image/create-vue-next.png" height="96" />
+ <img align="center" src="https://raw.githubusercontent.com/selemondev/create-vue-next/master/image/create-vue-next.png" height="400" />
 </p>
 
 ## Create Vue Next ⚡

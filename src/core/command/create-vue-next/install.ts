@@ -65,7 +65,7 @@ async function installDeps() {
 
     options.useVitest && logger.info(`${options.package} run test:unit to run tests`);
   
-    options.useTypeScript && console.log()
+    options.useVitest && console.log()
 
     options.useTypeScript && logger.info(`${options.package} run type-check`);
 

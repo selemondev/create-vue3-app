@@ -4,7 +4,7 @@
 
 ## Create Vue Next ⚡
 
-The Next Generation Vue Scaffolding Tool 🛠️
+The Next Generation Vue Scaffolding Tool powered by Vite 🛠️
 
 ## Usage 
 

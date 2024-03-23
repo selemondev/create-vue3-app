@@ -18,29 +18,9 @@ npx @selemondev/create-vue3-app@latest
 npx @selemondev/create-vue3-app <project-name> --ts --eslint --tailwind --use-pnpm
 ```
 
-### yarn
-
-```bash
-yarn @selemondev/create-vue3-app
-
-# OR
-
-yarn @selemondev/create-vue3-app <project-name> --ts --eslint --tailwind --use-pnpm
-```
-
-### pnpm
-
-```bash
-pnpm @selemondev/create-vue3-app@latest
-
-# OR
-
-pnpm @selemondev/create-vue3-app@latest <project-name> --ts --eslint --tailwind --use-pnpm
-```
-
 ## Options
 
-You can also pass command line arguments to set up a new project non-interactively. Run `@selemondev/create-vue3-app --help` to see the available command line arguments:
+You can also pass command line arguments to set up a new project non-interactively. Run `npx @selemondev/create-vue3-app --help` to see the available command line arguments:
 
 ```bash
 Usage: @selemondev/create-vue3-app <project-name> [options]

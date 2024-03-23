@@ -8,7 +8,7 @@ import options from './core/utils/vue/options';
 async function main() {
       program
             .version(packageJson.version)
-            .description(`Create Vue Next. The Next Generation Vue Scaffolding Tool ⚡`)
+            .description(`Create Vue3 App. The Next Generation Vue Scaffolding Tool ⚡`)
             .action((name: string) => {
                   options.name = name;
             })

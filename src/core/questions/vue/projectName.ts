@@ -1,7 +1,7 @@
 import options from '../../../core/utils/vue/options'
 import emptyDirName from '../../../utils/emptyDirName'
 import { validatePackageName } from "../../../utils/validatePackageName"
-const defaultProjectName = 'create-vue-next'
+const defaultProjectName = 'create-vue3-app'
 
 const packageName = [
     {

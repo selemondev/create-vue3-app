@@ -2,7 +2,7 @@
  <img align="center" src="https://raw.githubusercontent.com/selemondev/create-vue-next/master/image/create-vue-next.png" height="400" />
 </p>
 
-## Create Vue Next ⚡
+## Create Vue3 App ⚡
 
 The Next Generation Vue Scaffolding Tool powered by Vite 🛠️
 
@@ -11,39 +11,39 @@ The Next Generation Vue Scaffolding Tool powered by Vite 🛠️
 ### npx
 
 ```bash
-npx create-vue-next@latest
+npx @selemondev/create-vue3-app@latest
 
 # OR
 
-npx create-vue-next <project-name> --ts --eslint --tailwind --use-pnpm
+npx @selemondev/create-vue3-app <project-name> --ts --eslint --tailwind --use-pnpm
 ```
 
 ### yarn
 
 ```bash
-yarn create vue-next
+yarn @selemondev/create-vue3-app
 
 # OR
 
-yarn create vue-next <project-name> --ts --eslint --tailwind --use-pnpm
+yarn @selemondev/create-vue3-app <project-name> --ts --eslint --tailwind --use-pnpm
 ```
 
 ### pnpm
 
 ```bash
-pnpm create vue-next@latest
+pnpm @selemondev/create-vue3-app@latest
 
 # OR
 
-pnpm create vue-next@latest <project-name> --ts --eslint --tailwind --use-pnpm
+pnpm @selemondev/create-vue3-app@latest <project-name> --ts --eslint --tailwind --use-pnpm
 ```
 
 ## Options
 
-You can also pass command line arguments to set up a new project non-interactively. Run `create-vue-next --help` to see the available command line arguments:
+You can also pass command line arguments to set up a new project non-interactively. Run `@selemondev/create-vue3-app --help` to see the available command line arguments:
 
 ```bash
-Usage: create-vue-next <project-name> [options]
+Usage: @selemondev/create-vue3-app <project-name> [options]
 
 Options:
   -V, --version   output the version number

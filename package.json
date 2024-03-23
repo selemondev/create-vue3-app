@@ -1,6 +1,6 @@
 {
-  "name": "create-vue-next",
-  "version": "0.0.2",
+  "name": "@selemondev/create-vue3-app",
+  "version": "0.0.3",
   "description": "The Next Generation Vue Scaffolding Tool ✨",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -21,7 +21,7 @@
     }
   },
   "bin": {
-    "create-vue-next": "./dist/index.js"
+    "@selemondev/create-vue3-app": "./dist/index.js"
   },
   "files": [
     "dist",
@@ -29,7 +29,7 @@
     "template"
   ],
   "keywords": [
-    "create-vue-next",
+    "@selemondev/create-vue3-app",
     "Vue CLI",
     "Vue 3 CLI",
     "Vite CLI",

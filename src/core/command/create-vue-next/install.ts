@@ -17,7 +17,7 @@ async function installDeps() {
 
     await cmdIgnore('git', ['add .'])
 
-    await cmdIgnore('git', ['commit -m "Initialized by create-vue-next"'])
+    await cmdIgnore('git', ['commit -m "Initialized by create-vue3-app"'])
   }
 
 

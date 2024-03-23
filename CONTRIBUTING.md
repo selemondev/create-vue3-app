@@ -18,7 +18,7 @@ Every significant change is documented in the changelog file.
 
 ## Reporting Issues
 
-Welcome to Create-Vue-Next CLI! We value your feedback and contributions to make this project better. If you encounter any bugs or have feature requests, please use [Github issues](https://github.com/selemondev/create-vue-next/issues) issues to submit them.
+Welcome to Init-Vue3-App CLI! We value your feedback and contributions to make this project better. If you encounter any bugs or have feature requests, please use [Github issues](https://github.com/selemondev/init-vue3-app/issues) issues to submit them.
 
 Before reporting an issue, we ask you to:
 
@@ -50,19 +50,19 @@ The following is a list of commit types:
 
 ### Commit Types:
 
-- `feat`: Adding a new snippet or significant functionality to the Create-Vue-Next CLI.
+- `feat`: Adding a new snippet or significant functionality to the Init-Vue3-App CLI.
 
-- `fix`: Addressing bugs or issues in existing Create-Vue-Next CLI.
+- `fix`: Addressing bugs or issues in existing Init-Vue3-App CLI.
 
-- `docs`: Commits related to documentation changes for Create-Vue-Next CLI.
+- `docs`: Commits related to documentation changes for Init-Vue3-App CLI.
 
-- `style`: Commits related to code formatting, styling, or theming of Create-Vue-Next CLI.
+- `style`: Commits related to code formatting, styling, or theming of Init-Vue3-App CLI.
 
 - `refactor`: Code changes that enhance the library's structure without introducing new features or fixing bugs.
 
-- `perf`: Commits aimed at improving performance for Create-Vue-Next CLI.
+- `perf`: Commits aimed at improving performance for Init-Vue3-App CLI.
 
-- `test`: Commits related to testing Create-Vue-Next CLI.
+- `test`: Commits related to testing Init-Vue3-App CLI.
 
 - `chore`: Other commits not affecting source or test files directly.
 

@@ -10,6 +10,7 @@ import tailwindPrompt from "./tailwind";
 import typeScriptPrompt from "./typescript";
 import eslintPrompt from "./eslint"
 import program from '../../program'
+import { packageJsonMap } from '../../utils/vue/ejsMapConstant'
 async function createVueQuestions(): Promise<void> {
   try {
     options.name = program.args[0] ?? (await createQuestion(projectName)).name;
@@ -27,7 +28,13 @@ async function createVueQuestions(): Promise<void> {
     if(!options.package) {
       await createQuestion(packageManager)
     }
-    await createQuestion(deploy);
+    const VercelCLI = packageJsonMap.get('vercelCLI')
+
+    const deploymentCLI = await createQuestion(deploy);
+
+    options.VercelCLI = deploymentCLI?.deploy === 'vercel' && VercelCLI;
+
+    options.useVercelCLI = !!options.VercelCLI;
 
     await createQuestion(initializeGit);
 

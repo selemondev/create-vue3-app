@@ -89,6 +89,13 @@ const vitest = {
     dev: ['dev', 'dev', 'dev']
 }
 
+const vercelCLI = {
+    name: ['vercel'],
+    version: ["^34.1.7"],
+    stableVersion: ["^34.1.7"],
+    dev: ['dev']
+}
+
 const constantDevDeps = {
     name: options.useTypeScript ? typescript.name : javascript.name,
     version: options.useTypeScript ? typescript.version : javascript.version,
@@ -114,5 +121,6 @@ export {
     eslintJsVue,
     vueUse,
     pinia,
-    router
+    router,
+    vercelCLI
 }

@@ -28,13 +28,19 @@ async function createVueQuestions(): Promise<void> {
     if(!options.package) {
       await createQuestion(packageManager)
     }
-    const VercelCLI = packageJsonMap.get('vercelCLI')
+    const VercelCLI = packageJsonMap.get('vercelCLI');
+
+    const NetlifyCLI = packageJsonMap.get('netlifyCLI');
 
     const deploymentCLI = await createQuestion(deploy);
 
     options.VercelCLI = deploymentCLI?.deploy === 'vercel' && VercelCLI;
 
+    options.NetlifyCLI = deploymentCLI?.deploy === 'netlify' && NetlifyCLI;
+
     options.useVercelCLI = !!options.VercelCLI;
+
+    options.useNetlifyCLI = !!options.NetlifyCLI;
 
     await createQuestion(initializeGit);
 

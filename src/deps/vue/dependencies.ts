@@ -96,6 +96,13 @@ const vercelCLI = {
     dev: ['dev']
 }
 
+const netlifyCLI = {
+    name: ['netlify-cli'],
+    version: ["^17.30.0"],
+    stableVersion: ["^17.30.0"],
+    dev: ['dev']
+}
+
 const constantDevDeps = {
     name: options.useTypeScript ? typescript.name : javascript.name,
     version: options.useTypeScript ? typescript.version : javascript.version,
@@ -122,5 +129,6 @@ export {
     vueUse,
     pinia,
     router,
-    vercelCLI
+    vercelCLI,
+    netlifyCLI
 }

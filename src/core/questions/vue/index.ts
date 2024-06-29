@@ -18,7 +18,6 @@ async function getVueProperty() {
   const JavaScript = packageJsonMap.get('javascript');
   const DevTool = packageJsonMap.get('devTool');
   const VueUse = packageJsonMap.get('vueUse');
-  const VercelCLI = packageJsonMap.get('vercelCLI')
 
   resolveOptions(options, packageJsonMap)
 
@@ -35,8 +34,6 @@ async function getVueProperty() {
   options.DevTool = DevTool;
 
   options.Router = Router;
-
-  options.VercelCLI = options.deploy === 'vercel' ? VercelCLI : '';
 
   options.TanStackVueQuery = TanStackVueQuery
 

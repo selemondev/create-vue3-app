@@ -4,6 +4,7 @@ import fs from 'fs-extra';
 export function getFilterFile() {
   async function vueFilterFileActions() {
     if (!options.useRouter) {
+      fs.remove(`${options.dest}/src/views`)
       fs.remove(`${options.dest}/src/router`)
     }
 

@@ -33,7 +33,7 @@ async function getVueProperty() {
 
   options.DevTool = DevTool;
 
-  options.Router = Router
+  options.Router = Router;
 
   options.TanStackVueQuery = TanStackVueQuery
 

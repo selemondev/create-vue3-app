@@ -2,7 +2,7 @@
   <script setup lang="ts">
     <% if (!useRouter) {
       -%>
-    import HomeView from '@/views/HomeView.vue'
+      import TheWelcome from './components/TheWelcome.vue';
     <% } -%>
     <% if (useTanStackVueQuery) {
       -%>
@@ -15,7 +15,7 @@
       <script setup>
       <% if (!useRouter) {
           -%>
-      import HomeView from '@/views/HomeView.vue'
+      import TheWelcome from './components/TheWelcome.vue';
       <% } -%>
       </script>
       <% } -%>
@@ -23,7 +23,7 @@
 
         <template>
           <% if (!useRouter) { -%>
-            <HomeView />
+            <TheWelcome />
             <% } -%>
               <% if (useRouter) { -%>
                 <RouterView />

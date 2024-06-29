@@ -1,5 +1,5 @@
 {
-  "name": "@selemondev/create-vue3-app",
+  "name": "create-vue-app",
   "version": "0.0.3",
   "description": "The Next Generation Vue Scaffolding Tool ✨",
   "type": "module",

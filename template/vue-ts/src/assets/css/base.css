@@ -10,7 +10,6 @@ body {
   background: black;
   height: 100vh;
   font-family: sans-serif;
-  overflow-y: hidden;
 }
 
 .gradient-border {

@@ -1,7 +1,7 @@
 import ejs from "ejs";
 import fs from 'fs-extra'
 import path from "path";
-import prettier from "prettier"
+import { format, resolveConfig } from "prettier";
 import options from '../core/utils/vue/options'
 import { fileURLToPath } from "node:url";
 import { dirname } from "path";
@@ -31,7 +31,7 @@ export async function ejsRender(filePath: string, name: string): Promise<void> {
         const code = ejs.render(templateCode.toString(), options);
 
         const extname = path.extname(filePath).replace(/[.]/g, '')
-        const opts = await prettier.resolveConfig(templatePath)
+        const opts = await resolveConfig(templatePath)
 
         try {
             switch (extname) {
@@ -39,19 +39,19 @@ export async function ejsRender(filePath: string, name: string): Promise<void> {
                 case 'tsx':
                 case 'jsx':
                 case 'js':
-                    prettierCode = await prettier.format(code, {
+                    prettierCode = await format(code, {
                         parser: 'babel',
                         ...opts
                     });
                     break;
                 case 'json':
-                    prettierCode = await prettier.format(code, {
+                    prettierCode = await format(code, {
                         parser: "json",
                         ...opts
                     });
                     break;
                 case 'cjs':
-                    prettierCode = await prettier.format(code, {
+                    prettierCode = await format(code, {
                         parser: "babel",
                         ...opts
                     });
@@ -63,7 +63,7 @@ export async function ejsRender(filePath: string, name: string): Promise<void> {
                     prettierCode = code
                     break
                 default:
-                    prettierCode = await prettier.format(code, { parser: extname })
+                    prettierCode = await format(code, { parser: extname })
                     break
             }
         } catch (err) {

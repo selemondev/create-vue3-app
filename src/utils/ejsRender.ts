@@ -1,16 +1,22 @@
 import ejs from "ejs";
 import fs from 'fs-extra'
 import path from "path";
-import { format as prettierFormatter } from "prettier/standalone"
-import parserBabel from "prettier/parser-babel";
-import parserEstree from "prettier/plugins/estree";
+import { format, resolveConfig } from "prettier";
+import { fileURLToPath } from "node:url";
+import { dirname } from "path";
 import options from '../core/utils/vue/options'
 
 // formatting the code
 
 export async function ejsRender(filePath: string, name: string): Promise<void> {
     try {
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = dirname(__filename);
         let prettierCode: string = '';
+
+        const language = options.useTypeScript ? 'vue-ts' : 'vue-js';
+
+        const templatePath = path.resolve(__dirname, `../template/${language}`)
 
         const file = path.parse(filePath);
 
@@ -24,39 +30,37 @@ export async function ejsRender(filePath: string, name: string): Promise<void> {
 
         const code = ejs.render(templateCode.toString(), options);
 
-        const extensionName = path.extname(filePath).replace(/[.]/g, '')
+        const extname = path.extname(filePath).replace(/[.]/g, '')
+        const opts = await resolveConfig(templatePath)
 
         try {
-            switch (extensionName) {
+            switch (extname) {
                 case 'ts':
                 case 'tsx':
                 case 'jsx':
                 case 'js':
-                    prettierCode = await prettierFormatter(code, {
+                    prettierCode = await format(code, {
                         parser: 'babel',
-                        plugins: [parserBabel, parserEstree]
+                        ...opts
                     });
                     break;
                 case 'json':
-                    prettierCode = await prettierFormatter(code, {
+                    prettierCode = await format(code, {
                         parser: "json",
-                        plugins: [parserBabel, parserEstree]
+                        ...opts
                     });
                     break;
                 case 'cjs':
-                    prettierCode = await prettierFormatter(code, {
+                    prettierCode = await format(code, {
                         parser: "babel",
-                        plugins: [parserBabel, parserEstree]
+                        ...opts
                     });
                     break;
                 case 'toml':
                     prettierCode = code
-                    break;
-                case '':
-                    prettierCode = code
                     break
                 default:
-                    prettierCode = await prettierFormatter(code, { parser: extensionName })
+                    prettierCode = await format(code, { parser: extname })
                     break
             }
         } catch (err) {

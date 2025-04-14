@@ -1,6 +1,6 @@
 {
   "name": "@selemondev/create-vue3-app",
-  "version": "0.0.8",
+  "version": "0.0.7",
   "description": "The Next Generation Vue Scaffolding Tool ✨",
   "type": "module",
   "main": "./dist/index.cjs",

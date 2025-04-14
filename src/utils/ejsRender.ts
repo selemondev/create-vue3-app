@@ -1,6 +1,6 @@
-import { render } from "ejs";
-import { readFile, outputFile, remove } from 'fs-extra'
-import { resolve, extname, parse } from "path";
+import ejs from "ejs";
+import fs from 'fs-extra'
+import path from "path";
 import { format as prettierFormatter } from "prettier/standalone"
 import parserBabel from "prettier/parser-babel";
 import parserEstree from "prettier/plugins/estree";
@@ -12,19 +12,19 @@ export async function ejsRender(filePath: string, name: string): Promise<void> {
     try {
         let prettierCode: string = '';
 
-        const file = parse(filePath);
+        const file = path.parse(filePath);
 
-        const dest = resolve(process.cwd(), name)
+        const dest = path.resolve(process.cwd(), name)
 
-        const readFilePath = resolve(dest, file.dir, `${file.name}.ejs`)
+        const readFilePath = path.resolve(dest, file.dir, `${file.name}.ejs`)
 
-        const outputFilePath = resolve(dest, filePath)
+        const outputFilePath = path.resolve(dest, filePath)
 
-        const templateCode = await readFile(readFilePath)
+        const templateCode = await fs.readFile(readFilePath)
 
-        const code = render(templateCode.toString(), options);
+        const code = ejs.render(templateCode.toString(), options);
 
-        const extensionName = extname(filePath).replace(/[.]/g, '')
+        const extensionName = path.extname(filePath).replace(/[.]/g, '')
 
         try {
             switch (extensionName) {
@@ -56,14 +56,14 @@ export async function ejsRender(filePath: string, name: string): Promise<void> {
                     prettierCode = code
                     break
                 default:
-                    prettierCode = await prettierFormatter(code, { parser: extname })
+                    prettierCode = await prettierFormatter(code, { parser: extensionName })
                     break
             }
         } catch (err) {
             console.log(err)
         }
-        await outputFile(outputFilePath, prettierCode)
-        await remove(readFilePath)
+        await fs.outputFile(outputFilePath, prettierCode)
+        await fs.remove(readFilePath)
     } catch (error) {
         console.log(error)
     }

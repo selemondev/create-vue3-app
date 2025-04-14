@@ -1,6 +1,5 @@
 import type { StdioOptions } from "child_process";
 import { spawn } from "child_process";
-import { logger } from "./logger";
 
 export const createSpawnCmd = (dest: string | undefined, stdio: StdioOptions = 'inherit') => {
     return function (cmd: string, args: string[]): Promise<unknown> {
@@ -15,7 +14,7 @@ export const createSpawnCmd = (dest: string | undefined, stdio: StdioOptions = '
                 code === 0 ? resolve(true) : reject(false);
             })
         }).catch((err) => {
-            logger.error(err)
+            return err;
         })
     }
 }

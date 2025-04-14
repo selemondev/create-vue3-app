@@ -1,59 +1,52 @@
-import ejs from "ejs";
-import fs from 'fs-extra'
-import path from "path";
-import { format, resolveConfig } from "prettier";
+import { render } from "ejs";
+import { readFile, outputFile, remove } from 'fs-extra'
+import { resolve, extname, parse } from "path";
+import { format as prettierFormatter } from "prettier/standalone"
+import parserBabel from "prettier/parser-babel";
+import parserEstree from "prettier/plugins/estree";
 import options from '../core/utils/vue/options'
-import { fileURLToPath } from "node:url";
-import { dirname } from "path";
 
 // formatting the code
 
 export async function ejsRender(filePath: string, name: string): Promise<void> {
     try {
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = dirname(__filename);
         let prettierCode: string = '';
 
-        const language = options.useTypeScript ? 'vue-ts' : 'vue-js';
+        const file = parse(filePath);
 
-        const templatePath = path.resolve(__dirname, `../template/${language}`)
+        const dest = resolve(process.cwd(), name)
 
-        const file = path.parse(filePath);
+        const readFilePath = resolve(dest, file.dir, `${file.name}.ejs`)
 
-        const dest = path.resolve(process.cwd(), name)
+        const outputFilePath = resolve(dest, filePath)
 
-        const readFilePath = path.resolve(dest, file.dir, `${file.name}.ejs`)
+        const templateCode = await readFile(readFilePath)
 
-        const outputFilePath = path.resolve(dest, filePath)
+        const code = render(templateCode.toString(), options);
 
-        const templateCode = await fs.readFile(readFilePath)
-
-        const code = ejs.render(templateCode.toString(), options);
-
-        const extname = path.extname(filePath).replace(/[.]/g, '')
-        const opts = await resolveConfig(templatePath)
+        const extensionName = extname(filePath).replace(/[.]/g, '')
 
         try {
-            switch (extname) {
+            switch (extensionName) {
                 case 'ts':
                 case 'tsx':
                 case 'jsx':
                 case 'js':
-                    prettierCode = await format(code, {
+                    prettierCode = await prettierFormatter(code, {
                         parser: 'babel',
-                        ...opts
+                        plugins: [parserBabel, parserEstree]
                     });
                     break;
                 case 'json':
-                    prettierCode = await format(code, {
+                    prettierCode = await prettierFormatter(code, {
                         parser: "json",
-                        ...opts
+                        plugins: [parserBabel, parserEstree]
                     });
                     break;
                 case 'cjs':
-                    prettierCode = await format(code, {
+                    prettierCode = await prettierFormatter(code, {
                         parser: "babel",
-                        ...opts
+                        plugins: [parserBabel, parserEstree]
                     });
                     break;
                 case 'toml':
@@ -63,14 +56,14 @@ export async function ejsRender(filePath: string, name: string): Promise<void> {
                     prettierCode = code
                     break
                 default:
-                    prettierCode = await format(code, { parser: extname })
+                    prettierCode = await prettierFormatter(code, { parser: extname })
                     break
             }
         } catch (err) {
             console.log(err)
         }
-        await fs.outputFile(outputFilePath, prettierCode)
-        await fs.remove(readFilePath)
+        await outputFile(outputFilePath, prettierCode)
+        await remove(readFilePath)
     } catch (error) {
         console.log(error)
     }

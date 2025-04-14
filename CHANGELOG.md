@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.8
+
+[compare changes](https://github.com/selemondev/create-vue3-app/compare/v0.0.3...v0.0.8)
+
+### 🏡 Chore
+
+- Update version and generate release ([209469c](https://github.com/selemondev/create-vue3-app/commit/209469c))
+
+### ❤️ Contributors
+
+- Selemondev <selemondev19@gmail.com>
+
 ## v0.0.3
 
 [compare changes](https://github.com/selemondev/create-vue3-app/compare/v0.0.2...v0.0.3)

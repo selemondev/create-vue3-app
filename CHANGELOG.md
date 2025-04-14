@@ -3,6 +3,22 @@
 
 ## v0.0.8
 
+[compare changes](https://github.com/selemondev/create-vue3-app/compare/v0.0.7...v0.0.8)
+
+### 🩹 Fixes
+
+- Import names from fs-extra ([520ae91](https://github.com/selemondev/create-vue3-app/commit/520ae91))
+
+### 🏡 Chore
+
+- **release:** V0.0.8 ([c9d15e5](https://github.com/selemondev/create-vue3-app/commit/c9d15e5))
+
+### ❤️ Contributors
+
+- Selemondev <selemondev19@gmail.com>
+
+## v0.0.8
+
 [compare changes](https://github.com/selemondev/create-vue3-app/compare/v0.0.3...v0.0.8)
 
 ### 🏡 Chore

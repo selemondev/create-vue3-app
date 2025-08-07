@@ -10,7 +10,7 @@
     "dev": "esno src/index.ts",
     "build:package": "tsup-node src/index.ts --format cjs,esm --clean --dts --minify --shims",
     "generate:release": "npx changelogen@latest --release",
-    "package:beta": "npm run build && npm publish --tag beta",
+    "package:beta": "pnpm build:package && npm publish --tag beta",
     "package": "pnpm build:package && npm publish --access=public"
   },
   "exports": {

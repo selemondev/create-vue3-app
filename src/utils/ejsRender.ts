@@ -1,22 +1,18 @@
 import ejs from "ejs";
 import fs from 'fs-extra'
 import path from "path";
-import { format, resolveConfig } from "prettier";
-import { fileURLToPath } from "node:url";
-import { dirname } from "path";
+import { format as prettierFormatter } from "prettier/standalone";
+import * as prettierPluginBabel from "prettier/plugins/babel";
+import * as prettierPluginEstree from "prettier/plugins/estree";
+import * as prettierPluginHtml from "prettier/plugins/html";
+import * as prettierPluginTypescript from "prettier/plugins/typescript";
+import * as prettierPluginPostcss from "prettier/plugins/postcss";
 import options from '../core/utils/vue/options'
 
 // formatting the code
-
 export async function ejsRender(filePath: string, name: string): Promise<void> {
     try {
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = dirname(__filename);
         let prettierCode: string = '';
-
-        const language = options.useTypeScript ? 'vue-ts' : 'vue-js';
-
-        const templatePath = path.resolve(__dirname, `../template/${language}`)
 
         const file = path.parse(filePath);
 
@@ -31,36 +27,62 @@ export async function ejsRender(filePath: string, name: string): Promise<void> {
         const code = ejs.render(templateCode.toString(), options);
 
         const extname = path.extname(filePath).replace(/[.]/g, '')
-        const opts = await resolveConfig(templatePath)
 
         try {
             switch (extname) {
+                case 'vue':
+                    prettierCode = await prettierFormatter(code, {
+                        parser: 'vue',
+                        plugins: [
+                            prettierPluginHtml,
+                            prettierPluginBabel,
+                            prettierPluginEstree,
+                            prettierPluginTypescript,
+                            prettierPluginPostcss
+                        ]
+                    });
+                    break;
                 case 'ts':
                 case 'tsx':
                 case 'jsx':
                 case 'js':
-                    prettierCode = await format(code, {
+                    prettierCode = await prettierFormatter(code, {
                         parser: 'babel',
-                        ...opts
+                        plugins: [prettierPluginBabel, prettierPluginEstree]
                     });
                     break;
                 case 'json':
-                    prettierCode = await format(code, {
+                    prettierCode = await prettierFormatter(code, {
                         parser: "json",
-                        ...opts
+                        plugins: [prettierPluginBabel, prettierPluginEstree]
                     });
                     break;
                 case 'cjs':
-                    prettierCode = await format(code, {
+                    prettierCode = await prettierFormatter(code, {
                         parser: "babel",
-                        ...opts
+                        plugins: [prettierPluginBabel, prettierPluginEstree]
+                    });
+                    break;
+                case 'html':
+                    prettierCode = await prettierFormatter(code, {
+                        parser: 'html',
+                        plugins: [prettierPluginHtml]
+                    });
+                    break;
+                case 'css':
+                case 'scss':
+                case 'less':
+                    prettierCode = await prettierFormatter(code, {
+                        parser: 'css',
+                        plugins: [prettierPluginPostcss]
                     });
                     break;
                 case 'toml':
                     prettierCode = code
                     break
                 default:
-                    prettierCode = await format(code, { parser: extname })
+                    // Fallback: keep code as-is to avoid pulling extra parsers
+                    prettierCode = code
                     break
             }
         } catch (err) {

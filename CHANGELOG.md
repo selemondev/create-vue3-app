@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.0.11
+
+[compare changes](https://github.com/selemondev/create-vue3-app/compare/v0.0.10...v0.0.11)
+
+### 🚀 Enhancements
+
+- Check dependency updates ([60016a9](https://github.com/selemondev/create-vue3-app/commit/60016a9))
+- Add Tailwind v4 and update template ([94eff3d](https://github.com/selemondev/create-vue3-app/commit/94eff3d))
+
+### 🏡 Chore
+
+- Remove unused imports ([72d4446](https://github.com/selemondev/create-vue3-app/commit/72d4446))
+
+### ❤️ Contributors
+
+- Selemondev <selemondev19@gmail.com>
+
 ## v0.0.8
 
 [compare changes](https://github.com/selemondev/create-vue3-app/compare/v0.0.7...v0.0.8)

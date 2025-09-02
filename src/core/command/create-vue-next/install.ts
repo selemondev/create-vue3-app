@@ -3,7 +3,10 @@ import { logger } from "../../../utils/logger";
 import { createSpawnCmd } from "../../../utils/createSpawnCmd";
 import ora from "ora";
 import chalk from "chalk";
+import { join, resolve } from "path";
 import { packageManagerExecutable } from "../../../utils/package-manager-executable";
+import { cwd } from "process";
+import { read, readFile, writeFile } from "fs-extra";
 async function installDeps() {
   // No output will be shown in the console
   const cmdIgnore = createSpawnCmd(options.dest, "ignore");

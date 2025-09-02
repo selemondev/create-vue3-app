@@ -1,37 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --foreground-rgb: 255, 255, 255;
-      --background-start-rgb: 0, 0, 0;
-      --background-end-rgb: 0, 0, 0;
-    }
-  }
-  
-  body {
-    color: rgb(var(--foreground-rgb));
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgb(var(--background-end-rgb))
-      )
-      rgb(var(--background-start-rgb));
-  }
-  
-  @layer utilities {
-    .text-balance {
-      text-wrap: balance;
-    }
-  }
+@theme {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
 
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
 
 .gradient-border {
   position: relative;
@@ -40,38 +29,21 @@
   backdrop-filter: blur(10px);
   width: 100%;
 }
-@media (prefers-color-scheme: light) {
-  .gradient-border {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-  .gradient-border::before {
-    background: linear-gradient(
-      90deg,
-      #e2e2e2 0%,
-      #e2e2e2 25%,
-      #00dc82 50%,
-      #36e4da 75%,
-      #0047e1 100%
-    );
-  }
-}
-@media (prefers-color-scheme: dark) {
-  .gradient-border {
-    background-color: rgba(20, 20, 20, 0.3);
-  }
-  .gradient-border::before {
-    background: linear-gradient(
-      90deg,
-      #303030 0%,
-      #303030 25%,
-      #00dc82 50%,
-      #36e4da 75%,
-      #0047e1 100%
-    );
-  }
+.gradient-border {
+  background-color: rgba(20, 20, 20, 0.3);
 }
 .gradient-border::before {
-  content: '';
+  background: linear-gradient(
+    90deg,
+    #303030 0%,
+    #303030 25%,
+    #00dc82 50%,
+    #36e4da 75%,
+    #0047e1 100%
+  );
+}
+.gradient-border::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -83,9 +55,15 @@
   background-size: 400% auto;
   background-position: 0 0;
   opacity: 0.5;
-  transition: background-position 0.3s ease-in-out, opacity 0.2s ease-in-out;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  transition:
+    background-position 0.3s ease-in-out,
+    opacity 0.2s ease-in-out;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   z-index: -1;
@@ -94,4 +72,3 @@
   background-position: -50% 0;
   opacity: 1;
 }
-  

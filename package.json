@@ -1,6 +1,6 @@
 {
   "name": "@selemondev/create-vue3-app",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "The Next Generation Vue Scaffolding Tool ✨",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "esno src/index.ts",
     "build:package": "tsup-node src/index.ts --format cjs,esm --clean --dts --minify --shims",
-    "generate:release": "npx changelogen@latest --release",
+    "generate:release": "pnpx changelogen@latest --release",
     "package:beta": "pnpm build:package && npm publish --tag beta",
     "package": "pnpm build:package && npm publish --access=public"
   },

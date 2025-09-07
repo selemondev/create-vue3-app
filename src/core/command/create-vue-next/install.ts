@@ -2,7 +2,7 @@ import options from "../../../core/utils/vue/options";
 import { logger } from "../../../utils/logger";
 import { createSpawnCmd } from "../../../utils/createSpawnCmd";
 import ora from "ora";
-import chalk from "chalk";
+import pc from "picocolors";
 import { packageManagerExecutable } from "../../../utils/package-manager-executable";
 async function installDeps() {
   // No output will be shown in the console
@@ -24,7 +24,7 @@ async function installDeps() {
     await cmdIgnore(packageManagerExecutable(options.package), [
       "npm-check-updates",
     ]);
-    spinner.text = chalk.green(
+    spinner.text = pc.green(
       `Checking for dependency updates with ${options.package}.`,
     );
     spinner.succeed();
@@ -32,11 +32,11 @@ async function installDeps() {
     await cmdIgnore(packageManagerExecutable(options.package), [
       "npm-check-updates -u",
     ]);
-    spinner.text = chalk.green(`Updating dependencies.`);
+    spinner.text = pc.green(`Updating dependencies.`);
     spinner.succeed();
     spinner.start(`Installing the latest dependencies.`);
     await cmdIgnore(options.package, ["install"]);
-    spinner.text = chalk.green(`Installing the latest dependencies.`);
+    spinner.text = pc.green(`Installing the latest dependencies.`);
     spinner.succeed();
   }
 

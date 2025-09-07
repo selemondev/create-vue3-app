@@ -1,19 +1,19 @@
-import chalk from "chalk";
+import pc from "picocolors";
 
 export const logger = {
-    info: (...args: any[]) => {
-        console.log(chalk.cyan(...args))
-    },
+  info: (...args: string[]) => {
+    console.log(pc.cyan(args.map(String).join(" ")));
+  },
 
-    error: (...args: any[]) => { 
-        console.log(chalk.red(...args))
-    },
+  error: (...args: string[]) => {
+    console.log(pc.red(args.map(String).join(" ")));
+  },
 
-    warning: (...args: any[]) => {
-        console.log(chalk.yellow(...args))
-    },
+  warning: (...args: string[]) => {
+    console.log(pc.yellow(args.map(String).join(" ")));
+  },
 
-    success: (...args: any[]) => {
-        console.log(chalk.green(...args))
-    }
+  success: (...args: string[]) => {
+    console.log(pc.green(args.map(String).join(" ")));
+  },
 };

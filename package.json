@@ -46,7 +46,7 @@
     "@types/node": "^20.11.30",
     "@types/prompts": "^2.4.9",
     "@types/validate-npm-package-name": "^4.0.2",
-    "conf": "^12.0.0",
+    "conf": "^15.0.0",
     "esno": "^4.0.0",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3"

@@ -56,10 +56,10 @@ importers:
         version: 4.8.0
       tsup:
         specifier: ^8.0.2
-        version: 8.2.4(tsx@4.20.6)(typescript@5.5.4)
+        version: 8.2.4(tsx@4.20.6)(typescript@5.9.3)
       typescript:
         specifier: ^5.3.3
-        version: 5.5.4
+        version: 5.9.3
 
 packages:
 
@@ -1119,8 +1119,8 @@ packages:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
 
-  typescript@5.5.4:
-    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2016,7 +2016,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  tsup@8.2.4(tsx@4.20.6)(typescript@5.5.4):
+  tsup@8.2.4(tsx@4.20.6)(typescript@5.9.3):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.1)
       cac: 6.7.14
@@ -2035,7 +2035,7 @@ snapshots:
       sucrase: 3.35.0
       tree-kill: 1.2.2
     optionalDependencies:
-      typescript: 5.5.4
+      typescript: 5.9.3
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -2051,7 +2051,7 @@ snapshots:
 
   type-fest@3.13.1: {}
 
-  typescript@5.5.4: {}
+  typescript@5.9.3: {}
 
   uint8array-extras@0.3.0: {}
 

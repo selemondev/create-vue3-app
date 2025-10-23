@@ -30,8 +30,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       validate-npm-package-name:
-        specifier: ^5.0.0
-        version: 5.0.1
+        specifier: ^7.0.0
+        version: 7.0.0
     devDependencies:
       '@types/ejs':
         specifier: ^3.1.5
@@ -1135,9 +1135,9 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  validate-npm-package-name@5.0.1:
-    resolution: {integrity: sha512-OljLrQ9SQdOUqTaQxqL5dEfZWrXExyyWsozYlAWFawPVNuD83igl7uJD2RTkNMbniIYgt8l81eCJGIdQF7avLQ==}
-    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
+  validate-npm-package-name@7.0.0:
+    resolution: {integrity: sha512-bwVk/OK+Qu108aJcMAEiU4yavHUI7aN20TgZNBj9MR2iU1zPUl1Z1Otr7771ExfYTPTvfN8ZJ1pbr5Iklgt4xg==}
+    engines: {node: ^20.17.0 || >=22.9.0}
 
   webidl-conversions@4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
@@ -2059,7 +2059,7 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  validate-npm-package-name@5.0.1: {}
+  validate-npm-package-name@7.0.0: {}
 
   webidl-conversions@4.0.2: {}
 

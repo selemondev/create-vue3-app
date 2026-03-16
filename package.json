@@ -55,7 +55,7 @@
     "commander": "^12.0.0",
     "ejs": "^3.1.9",
     "fs-extra": "^11.2.0",
-    "ora": "^8.0.1",
+    "ora": "^9.0.0",
     "picocolors": "^1.1.1",
     "prettier": "^3.2.5",
     "prompts": "^2.4.2",

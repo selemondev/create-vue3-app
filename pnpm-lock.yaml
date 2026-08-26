@@ -19,7 +19,7 @@ importers:
         version: 11.3.4
       ora:
         specifier: ^8.0.1
-        version: 8.1.0
+        version: 8.2.0
       picocolors:
         specifier: ^1.1.1
         version: 1.1.1
@@ -56,7 +56,7 @@ importers:
         version: 4.8.0
       tsup:
         specifier: ^8.0.2
-        version: 8.2.4(tsx@4.20.6)(typescript@5.5.4)
+        version: 8.2.4(supports-color@7.2.0)(tsx@4.20.6)(typescript@5.5.4)
       typescript:
         specifier: ^5.3.3
         version: 5.5.4
@@ -909,8 +909,8 @@ packages:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
 
-  ora@8.1.0:
-    resolution: {integrity: sha512-GQEkNkH/GHOhPFXcqZs3IDahXEQcQxsSjEkK4KvEEST4t7eNzoMjxTzef+EZ+JluDEV+Raoi3WQ2CflnRdSVnQ==}
+  ora@8.2.0:
+    resolution: {integrity: sha512-weP+BZ8MVNnlCm8c0Qdc1WSWq4Qn7I+9CJGm7Qali6g44e/PUzbjNqJX5NJ9ljlNMosfJvg1fKEGILklK9cwnw==}
     engines: {node: '>=18'}
 
   package-json-from-dist@1.0.0:
@@ -1558,9 +1558,11 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  debug@4.3.6:
+  debug@4.3.6(supports-color@7.2.0):
     dependencies:
       ms: 2.1.2
+    optionalDependencies:
+      supports-color: 7.2.0
 
   dir-glob@3.0.1:
     dependencies:
@@ -1849,7 +1851,7 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  ora@8.1.0:
+  ora@8.2.0:
     dependencies:
       chalk: 5.3.0
       cli-cursor: 5.0.0
@@ -2026,13 +2028,13 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  tsup@8.2.4(tsx@4.20.6)(typescript@5.5.4):
+  tsup@8.2.4(supports-color@7.2.0)(tsx@4.20.6)(typescript@5.5.4):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.1)
       cac: 6.7.14
       chokidar: 3.6.0
       consola: 3.2.3
-      debug: 4.3.6
+      debug: 4.3.6(supports-color@7.2.0)
       esbuild: 0.23.1
       execa: 5.1.1
       globby: 11.1.0

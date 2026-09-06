@@ -39,17 +39,26 @@ export const logger = {
 
 export async function progress<T>(
   message: string,
-  operation: () => Promise<T>,
+  operation: (signal: AbortSignal) => Promise<T>,
 ): Promise<T> {
+  const controller = new AbortController();
+  const onCancel = () => controller.abort(new Cancellation());
+  process.once("SIGINT", onCancel);
+  process.once("SIGTERM", onCancel);
   const spinner = interactive ? clack.spinner() : undefined;
   if (spinner) spinner.start(message);
   else logger.info(message);
   try {
-    const result = await operation();
+    const result = await operation(controller.signal);
+    controller.signal.throwIfAborted();
     spinner?.stop(message);
     return result;
   } catch (cause) {
-    spinner?.error(`${message} failed`);
+    if (controller.signal.aborted) spinner?.cancel("Operation cancelled.");
+    else spinner?.error(`${message} failed`);
     throw cause;
+  } finally {
+    process.off("SIGINT", onCancel);
+    process.off("SIGTERM", onCancel);
   }
 }

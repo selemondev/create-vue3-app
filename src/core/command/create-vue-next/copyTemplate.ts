@@ -46,7 +46,7 @@ export default async function copyTemplate(): Promise<void> {
   const name = options.name;
   if (!destination || !name)
     throw new Error("A project directory is required.");
-  await progress("Creating project files", async () => {
+  await progress("Creating project files", async (signal) => {
     const language = options.useTypeScript ? "vue-ts" : "vue-js";
     const directory = path.dirname(fileURLToPath(import.meta.url));
     const packaged = path.resolve(directory, "../template", language);
@@ -62,8 +62,12 @@ export default async function copyTemplate(): Promise<void> {
         path.join(stage, ".gitignore"),
       );
       // Finish rendering before touching user files, including on formatter failure.
-      for (const file of vueFetchTemplateFiles()) await ejsRender(file, name);
+      for (const file of vueFetchTemplateFiles()) {
+        signal.throwIfAborted();
+        await ejsRender(file, name);
+      }
       await checkDestination(stage, destination);
+      signal.throwIfAborted();
       if (await fs.pathExists(destination))
         await fs.copy(stage, destination, {
           overwrite: options.force === true,

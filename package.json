@@ -7,8 +7,9 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "dev": "esno src/index.ts",
-    "build:package": "tsup-node src/index.ts --format cjs,esm --clean --dts --minify --shims",
+    "dev": "tsx src/index.ts",
+    "build:package": "tsup-node src/index.ts --target node20 --format cjs,esm --clean --dts --minify --shims",
+    "typecheck": "tsc --noEmit",
     "generate:release": "pnpx changelogen@latest --release",
     "package:beta": "pnpm build:package && npm publish --tag beta",
     "package": "pnpm build:package && npm publish --access=public"
@@ -40,24 +41,24 @@
   ],
   "author": "Selemondev",
   "license": "MIT",
+  "packageManager": "pnpm@10.34.5",
   "devDependencies": {
     "@types/ejs": "^3.1.5",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^24.9.0",
+    "@types/node": "^20.19.43",
     "@types/prompts": "^2.4.9",
     "@types/validate-npm-package-name": "^4.0.2",
-    "conf": "^15.0.2",
-    "esno": "^4.0.0",
-    "tsup": "^8.0.2",
-    "typescript": "^5.3.3"
+    "tsx": "^4.23.13",
+    "tsup": "^8.5.1",
+    "typescript": "~5.9.3"
   },
   "dependencies": {
     "commander": "^12.0.0",
     "ejs": "^3.1.9",
-    "fs-extra": "^11.2.0",
+    "fs-extra": "^11.4.0",
     "ora": "^8.0.1",
     "picocolors": "^1.1.1",
-    "prettier": "^3.2.5",
+    "prettier": "^3.9.6",
     "prompts": "^2.4.2",
     "validate-npm-package-name": "^7.0.0"
   }

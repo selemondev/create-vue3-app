@@ -29,14 +29,21 @@ export interface Options {
     useTypeScript?: boolean
     useVueUse?: boolean
     useJavaScript?: boolean
-    useTanStackVueQuery?: string
-    useVitest?: string
+    useTanStackVueQuery?: boolean
+    useVitest?: boolean
     useDevTool?: boolean
     useGitInit?: boolean
     usePinia?: boolean
     EslintScript?: string
     constantDevDeps?: string
     constantProDeps?: string
+    VitestScript?: string
+    TypeScriptScript?: string
+    packageName?: string
+    install?: boolean
+    yes?: boolean
+    force?: boolean
+    updateDeps?: boolean
   }
   
   const options: Options = {}

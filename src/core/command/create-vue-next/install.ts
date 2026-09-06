@@ -1,101 +1,37 @@
-import options from "../../../core/utils/vue/options";
-import { logger } from "../../../utils/logger";
-import { createSpawnCmd } from "../../../utils/createSpawnCmd";
-import ora from "ora";
-import pc from "picocolors";
-import { packageManagerExecutable } from "../../../utils/package-manager-executable";
-async function installDeps() {
-  // No output will be shown in the console
-  const cmdIgnore = createSpawnCmd(options.dest, "ignore");
-  const spinner = ora();
+import { note, outro } from '@clack/prompts';
+import options from '../../utils/vue/options';
+import { interactive, logger } from '../../../utils/logger';
+import { createSpawnCmd } from '../../../utils/createSpawnCmd';
 
-  const startTime: number = new Date().getTime();
-
+export default async function installDeps(): Promise<void> {
+  const command = createSpawnCmd(options.dest);
+  if (options.install !== false && options.package && options.package !== 'none') {
+    if (options.updateDeps) {
+      logger.warning('Updating dependency ranges to latest majors; compatibility is not guaranteed.');
+      await command('npx', ['--yes', 'npm-check-updates@18.3.1', '-u']);
+    }
+    // Keep subprocess output visible; an animated spinner would collide with it.
+    logger.info(`Installing dependencies with ${options.package}`);
+    await command(options.package, ['install']);
+  }
   if (options.useGitInit) {
-    await cmdIgnore("git", ["init"]);
-
-    await cmdIgnore("git", ["add", "."]);
-
-    await cmdIgnore("git", ["commit", "-m", "Initialized by create-vue3-app"]);
+    logger.info('Initializing Git repository');
+    await command('git', ['init']);
+    await command('git', ['add', '.']);
+    await command('git', ['commit', '-m', 'Initialized by create-vue3-app']);
   }
-
-  if (options.package && options.package !== "none") {
-    spinner.start(`Checking for dependency updates with ${options.package}.`);
-    const runner = packageManagerExecutable(options.package);
-    await cmdIgnore(runner.command, [...runner.args, "npm-check-updates"]);
-    spinner.text = pc.green(
-      `Checking for dependency updates with ${options.package}.`,
-    );
-    spinner.succeed();
-    spinner.start(`Updating dependencies.`);
-    await cmdIgnore(runner.command, [...runner.args, "npm-check-updates", "-u"]);
-    spinner.text = pc.green(`Updating dependencies.`);
-    spinner.succeed();
-    spinner.start(`Installing the latest dependencies.`);
-    await cmdIgnore(options.package, ["install"]);
-    spinner.text = pc.green(`Installing the latest dependencies.`);
-    spinner.succeed();
-  }
-
-  const endTime: number = new Date().getTime();
-  const usageTime: number = (endTime - startTime) / 1000;
-
-  console.log();
-
-  logger.info(`🚀 Completed in ${usageTime}s`);
-
-  console.log();
-
-  logger.success("✅ Project created successfully");
-
-  console.log();
-
-  logger.info(`cd ${options.name}`);
-
-  console.log();
-
-  if (options.package !== "none") {
-    logger.info(
-      options.package === "npm"
-        ? `${options.package} run dev to start the dev server`
-        : `${options.package} dev to start the dev server`,
-    );
-
-    console.log();
-
-    options.useEslint &&
-      logger.info(
-        options.package === "npm"
-          ? `${options.package} run lint`
-          : `${options.package} lint`,
-      );
-
-    options.useEslint && console.log();
-
-    options.useVitest &&
-      logger.info(`${options.package} run test:unit to run tests`);
-
-    options.useVitest && console.log();
-
-    options.useTypeScript && logger.info(`${options.package} run type-check`);
+  const manager = options.package === 'none' || !options.package ? 'npm' : options.package;
+  const steps = [`cd ${JSON.stringify(options.name)}`];
+  if (options.install === false || options.package === 'none') steps.push(`${manager} install`);
+  steps.push(`${manager} run dev`);
+  if (options.useEslint) steps.push(`${manager} run lint`);
+  if (options.useVitest) steps.push(`${manager} run test:unit`);
+  if (options.useTypeScript) steps.push(`${manager} run type-check`);
+  if (interactive) {
+    note(steps.join('\n'), 'Next steps');
+    outro(`Project created at ${options.dest}`);
   } else {
-    logger.info(`npm install - To install dependencies`);
-
-    console.log();
-
-    options.useEslint && logger.info("npm run lint to format your code");
-
-    options.useEslint && console.log();
-
-    logger.info("npm run dev to start the dev server");
-
-    options.useVitest && console.log();
-
-    options.useVitest && logger.info("npm run test:unit to run tests");
-
-    options.useTypeScript && console.log();
-
-    options.useTypeScript && logger.info("npm run type-check");
+    logger.success(`Project created at ${options.dest}`);
+    logger.info(steps.join('\n'));
   }
 }
-export default installDeps;

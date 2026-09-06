@@ -1,62 +1,23 @@
-import fs from "fs-extra";
-import path from "node:path";
-import options from "../../../core/utils/vue/options";
-import { ejsRender } from "../../../utils/ejsRender";
-import pc from "picocolors";
-import { templateFilesMap } from "../../../core/utils/vue/templateFile";
-import { getFilterFile } from "../../../filter/filterFiles";
-import { fileURLToPath } from "node:url";
-import { dirname } from "node:path";
-import ora from "ora";
+import fs from 'fs-extra';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import options from '../../utils/vue/options';
+import { ejsRender } from '../../../utils/ejsRender';
+import { templateFilesMap } from '../../utils/vue/templateFile';
+import { getFilterFile } from '../../../filter/filterFiles';
+import { progress } from '../../../utils/logger';
 
-async function copyTemplate() {
-  const __filename = fileURLToPath(import.meta.url);
-
-  const __dirname = dirname(__filename);
-
-  const spinner = ora("Copying template...").start();
-
-  const language = options.useTypeScript ? "vue-ts" : "vue-js";
-
-  options.src = path.resolve(__dirname, `../template/${language}`);
-
-  const dest = options.name && path.resolve(process.cwd(), options.name);
-
-  options.dest = dest;
-
-  const templatePath = path.resolve(
-    __dirname,
-    `../../../../template/${language}`,
-  );
-  options.templatePath = templatePath;
-
-  const filterFileFn = getFilterFile();
-
-  async function copy() {
-    const targetDirectory = path.resolve(__dirname, "../");
-    if (!dest) {
-      return;
-    }
-    await fs.copy(`${targetDirectory}/template/${language}`, dest);
-  }
-  await copy();
-
-  filterFileFn && (await filterFileFn());
-
-  options.dest &&
-    (await fs.move(
-      path.resolve(options.dest, ".gitignore.ejs"),
-      path.resolve(options.dest, ".gitignore"),
-      { overwrite: true },
-    ));
-
-  await Promise.all(
-    templateFilesMap
-      .get("vue")()
-      .map((file: string) => options.name && ejsRender(file, options.name)),
-  );
-  spinner.text = pc.green("Template successfully copied!");
-
-  spinner.succeed();
+export default async function copyTemplate(): Promise<void> {
+  await progress('Creating project files', async () => {
+    const language = options.useTypeScript ? 'vue-ts' : 'vue-js';
+    const directory = path.dirname(fileURLToPath(import.meta.url));
+    const packaged = path.resolve(directory, '../template', language);
+    const source = path.resolve(directory, '../../../../template', language);
+    options.src = await fs.pathExists(packaged) ? packaged : source;
+    if (!options.dest || !options.name) throw new Error('A project directory is required.');
+    await fs.copy(options.src, options.dest);
+    await getFilterFile()?.();
+    await fs.move(path.join(options.dest, '.gitignore.ejs'), path.join(options.dest, '.gitignore'), { overwrite: true });
+    await Promise.all(templateFilesMap.get('vue')().map((file: string) => ejsRender(file, options.name ?? '')));
+  });
 }
-export default copyTemplate;

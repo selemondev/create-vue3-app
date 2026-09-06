@@ -1,4 +1,5 @@
 import { note, outro } from '@clack/prompts';
+import spawn from 'cross-spawn';
 import options from '../../utils/vue/options';
 import { interactive, logger } from '../../../utils/logger';
 import { createSpawnCmd } from '../../../utils/createSpawnCmd';
@@ -15,10 +16,15 @@ export default async function installDeps(): Promise<void> {
     await command(options.package, ['install']);
   }
   if (options.useGitInit) {
-    logger.info('Initializing Git repository');
-    await command('git', ['init']);
-    await command('git', ['add', '.']);
-    await command('git', ['commit', '-m', 'Initialized by create-vue3-app']);
+    const existing = spawn.sync('git', ['rev-parse', '--is-inside-work-tree'], { cwd: options.dest, stdio: 'ignore' });
+    if (existing.status === 0) {
+      logger.info('Already inside a Git repository; existing history and index were left unchanged.');
+    } else {
+      logger.info('Initializing Git repository');
+      await command('git', ['init']);
+      await command('git', ['add', '.']);
+      await command('git', ['commit', '-m', 'Initialized by create-vue3-app']);
+    }
   }
   const manager = options.package === 'none' || !options.package ? 'npm' : options.package;
   const steps = [`cd ${JSON.stringify(options.name)}`];

@@ -93,3 +93,17 @@ test('rendering failure leaves an existing project unchanged', (context) => {
   assert.equal(readFileSync(join(cwd, 'my-app/src/App.vue'), 'utf8'), 'original app');
   assert.ok(!existsSync(join(cwd, 'my-app/.gitignore')));
 });
+
+test('Git initialization preserves an existing repository boundary', (context) => {
+  const cwd = join(workspace(context), 'existing-app');
+  mkdirSync(cwd);
+  const env = { ...process.env, GIT_AUTHOR_NAME: 'CLI Test', GIT_AUTHOR_EMAIL: 'cli@example.invalid', GIT_COMMITTER_NAME: 'CLI Test', GIT_COMMITTER_EMAIL: 'cli@example.invalid' };
+  assert.equal(spawnSync('git', ['init'], { cwd }).status, 0);
+  writeFileSync(join(cwd, 'keep.txt'), 'existing project');
+  assert.equal(spawnSync('git', ['add', '.'], { cwd }).status, 0);
+  assert.equal(spawnSync('git', ['commit', '-m', 'existing'], { cwd, env }).status, 0);
+  const before = spawnSync('git', ['rev-parse', 'HEAD'], { cwd, encoding: 'utf8' }).stdout;
+  const result = spawnSync(process.execPath, [executable, '.', '--yes', '--no-install', '--git', '--force'], { cwd, encoding: 'utf8', env: { ...env, CI: '1' }, timeout: 10000 });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(spawnSync('git', ['rev-parse', 'HEAD'], { cwd, encoding: 'utf8' }).stdout, before);
+});

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync, mkdirSync, existsSync, rmSync, symlinkSync, cpSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -48,4 +48,48 @@ test('existing positional destination requires explicit force', (context) => {
   assert.equal(result.status, 1);
   assert.match(result.stderr, /--force/);
   assert.equal(readFileSync(join(cwd, 'my-app/package.json'), 'utf8'), 'keep me');
+});
+
+test('force never writes through a nested destination symlink', (context) => {
+  if (process.platform === 'win32') return context.skip('Creating symlinks requires Windows privileges.');
+  const cwd = workspace(context);
+  mkdirSync(join(cwd, 'outside'));
+  writeFileSync(join(cwd, 'outside/main.ts'), 'keep me');
+  mkdirSync(join(cwd, 'my-app'));
+  symlinkSync(join(cwd, 'outside'), join(cwd, 'my-app/src'), 'dir');
+  const result = run(cwd, ['my-app', '--yes', '--no-install', '--force']);
+  assert.equal(result.status, 1);
+  assert.equal(readFileSync(join(cwd, 'outside/main.ts'), 'utf8'), 'keep me');
+  assert.ok(!existsSync(join(cwd, 'my-app/package.json')));
+});
+
+test('force replaces generated files but preserves unrelated files and Git', (context) => {
+  const cwd = workspace(context);
+  mkdirSync(join(cwd, 'my-app/.git'), { recursive: true });
+  writeFileSync(join(cwd, 'my-app/.git/keep'), 'git state');
+  writeFileSync(join(cwd, 'my-app/notes.txt'), 'user notes');
+  writeFileSync(join(cwd, 'my-app/package.json'), 'old package');
+  const result = run(cwd, ['my-app', '--yes', '--no-install', '--force']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(JSON.parse(readFileSync(join(cwd, 'my-app/package.json'), 'utf8')).name, 'my-app');
+  assert.equal(readFileSync(join(cwd, 'my-app/.git/keep'), 'utf8'), 'git state');
+  assert.equal(readFileSync(join(cwd, 'my-app/notes.txt'), 'utf8'), 'user notes');
+});
+
+test('rendering failure leaves an existing project unchanged', (context) => {
+  const cwd = workspace(context);
+  const fixture = join(cwd, 'cli');
+  cpSync(resolve('dist'), join(fixture, 'dist'), { recursive: true });
+  cpSync(resolve('template'), join(fixture, 'template'), { recursive: true });
+  writeFileSync(join(fixture, 'package.json'), '{"type":"module"}');
+  symlinkSync(resolve('node_modules'), join(fixture, 'node_modules'), 'junction');
+  writeFileSync(join(fixture, 'template/vue-ts/package.ejs'), '{ invalid json');
+  mkdirSync(join(cwd, 'my-app/src'), { recursive: true });
+  writeFileSync(join(cwd, 'my-app/package.json'), 'original package');
+  writeFileSync(join(cwd, 'my-app/src/App.vue'), 'original app');
+  const result = spawnSync(process.execPath, [join(fixture, 'dist/index.js'), 'my-app', '--yes', '--no-install', '--force'], { cwd, encoding: 'utf8', env: { ...process.env, CI: '1' }, timeout: 10000 });
+  assert.equal(result.status, 1);
+  assert.equal(readFileSync(join(cwd, 'my-app/package.json'), 'utf8'), 'original package');
+  assert.equal(readFileSync(join(cwd, 'my-app/src/App.vue'), 'utf8'), 'original app');
+  assert.ok(!existsSync(join(cwd, 'my-app/.gitignore')));
 });

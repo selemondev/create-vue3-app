@@ -1,8 +1,6 @@
 import options from './options'
 
-const templateFilesMap = new Map()
-templateFilesMap.set('vue', vueFetchTemplateFiles)
-export function vueFetchTemplateFiles(): string[] | any[] {
+export function vueFetchTemplateFiles(): string[] {
   const files = [
     'package.json',
     options.useTypeScript ? 'src/main.ts' : 'src/main.js',
@@ -10,6 +8,5 @@ export function vueFetchTemplateFiles(): string[] | any[] {
     options.useTypeScript ? 'vite.config.ts' : 'vite.config.js',
     'src/components/TheWelcome.vue'
   ]
-  return files.filter(Boolean)
+  return files;
 }
-export { templateFilesMap }

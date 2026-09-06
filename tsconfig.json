@@ -1,17 +1,16 @@
 {
-    "compilerOptions": {
-      "noEmit": true,
-      "target": "ESNext",
-      "lib": ["ESNext"],
-      "module": "ESNext",
-      "moduleResolution": "Bundler",
-      "resolveJsonModule": true,
-      "strict": true,
-      "strictNullChecks": true,
-      "esModuleInterop": true,
-      "skipDefaultLibCheck": true,
-      "skipLibCheck": true,
-    },
-    "include": ["src/**/*.ts", "tests/**/*.ts"]
-  }
-  
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts"]
+}

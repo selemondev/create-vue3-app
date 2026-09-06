@@ -8,7 +8,13 @@ const pinia = {
 };
 
 const eslintJsVue = {
-  name: ["eslint", "@eslint/js", "eslint-plugin-vue", "vue-eslint-parser", "globals"],
+  name: [
+    "eslint",
+    "@eslint/js",
+    "eslint-plugin-vue",
+    "vue-eslint-parser",
+    "globals",
+  ],
   version: ["^10.10.0", "^10.0.1", "^10.11.0", "^10.4.1", "^17.12.0"],
 };
 

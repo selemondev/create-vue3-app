@@ -70,4 +70,7 @@ async function main() {
             await createVueNext();
 
 }
-main();
+main().catch((cause) => {
+      console.error(cause instanceof Error ? cause.message : 'Project creation failed.');
+      process.exitCode = 1;
+});

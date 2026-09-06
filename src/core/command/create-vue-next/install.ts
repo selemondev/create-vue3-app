@@ -14,24 +14,21 @@ async function installDeps() {
   if (options.useGitInit) {
     await cmdIgnore("git", ["init"]);
 
-    await cmdIgnore("git", ["add ."]);
+    await cmdIgnore("git", ["add", "."]);
 
-    await cmdIgnore("git", ['commit -m "Initialized by create-vue3-app"']);
+    await cmdIgnore("git", ["commit", "-m", "Initialized by create-vue3-app"]);
   }
 
   if (options.package && options.package !== "none") {
     spinner.start(`Checking for dependency updates with ${options.package}.`);
-    await cmdIgnore(packageManagerExecutable(options.package), [
-      "npm-check-updates",
-    ]);
+    const runner = packageManagerExecutable(options.package);
+    await cmdIgnore(runner.command, [...runner.args, "npm-check-updates"]);
     spinner.text = pc.green(
       `Checking for dependency updates with ${options.package}.`,
     );
     spinner.succeed();
     spinner.start(`Updating dependencies.`);
-    await cmdIgnore(packageManagerExecutable(options.package), [
-      "npm-check-updates -u",
-    ]);
+    await cmdIgnore(runner.command, [...runner.args, "npm-check-updates", "-u"]);
     spinner.text = pc.green(`Updating dependencies.`);
     spinner.succeed();
     spinner.start(`Installing the latest dependencies.`);

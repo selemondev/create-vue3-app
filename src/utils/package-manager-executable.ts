@@ -1,22 +1,14 @@
-import { Options } from "../core/utils/vue/options";
+import type { Options } from '../core/utils/vue/options';
 
-export const packageManagerExecutable = (
-  packageManager: Options["package"],
-) => {
+export const packageManagerExecutable = (packageManager: Options['package']) => {
   switch (packageManager) {
-    case "npm":
-      return "npx";
-
-    case "yarn":
-      return "yarn dlx";
-
-    case "pnpm":
-      return "pnpx";
-
-    case "bun":
-      return "bunx";
-
+    case 'yarn':
+      return { command: 'yarn', args: ['dlx'] };
+    case 'pnpm':
+      return { command: 'pnpm', args: ['dlx'] };
+    case 'bun':
+      return { command: 'bunx', args: [] };
     default:
-      return "npx";
+      return { command: 'npx', args: ['--yes'] };
   }
 };

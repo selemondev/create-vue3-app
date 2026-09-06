@@ -52,12 +52,12 @@ try {
       run(cwd, "npm", ["run", "build"]);
       if (language === "ts") run(cwd, "npm", ["run", "type-check"]);
       if (full) {
-        run(cwd, "npm", ["run", "lint"]);
         await mkdir(join(cwd, "src/__tests__"), { recursive: true });
         await writeFile(
           join(cwd, `src/__tests__/counter.spec.${language}`),
           `import { expect, test } from 'vitest';\nimport { createPinia, setActivePinia } from 'pinia';\nimport { useCounterStore } from '../stores/counter';\ntest('counter updates its derived value', () => {\n  setActivePinia(createPinia());\n  const counter = useCounterStore();\n  counter.increment();\n  expect(counter.count).toBe(1);\n  expect(counter.doubleCount).toBe(2);\n});\n`,
         );
+        run(cwd, "npm", ["run", "lint", "--", "--no-fix"]);
         run(cwd, "npm", ["run", "test:unit", "--", "--run"]);
         if (language === "ts")
           run(cwd, "npm", [

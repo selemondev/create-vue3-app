@@ -1,2 +1,6 @@
-onlyBuiltDependencies:
-  - esbuild
+allowBuilds:
+  esbuild: true
+
+overrides:
+  # Keep tsup's bundler on the patched Windows development-server release.
+  tsup>esbuild: ^0.28.2

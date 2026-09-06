@@ -1,96 +1,22 @@
-import ejs from "ejs";
-import fs from 'fs-extra'
-import path from "path";
-import { format as prettierFormatter } from "prettier/standalone";
-import * as prettierPluginBabel from "prettier/plugins/babel";
-import * as prettierPluginEstree from "prettier/plugins/estree";
-import * as prettierPluginHtml from "prettier/plugins/html";
-import * as prettierPluginTypescript from "prettier/plugins/typescript";
-import * as prettierPluginPostcss from "prettier/plugins/postcss";
-import options from '../core/utils/vue/options'
+import ejs from 'ejs';
+import fs from 'fs-extra';
+import path from 'node:path';
+import { format } from 'prettier';
+import options from '../core/utils/vue/options';
 
-// formatting the code
 export async function ejsRender(filePath: string, name: string): Promise<void> {
-    try {
-        let prettierCode: string = '';
-
-        const file = path.parse(filePath);
-
-        const dest = path.resolve(process.cwd(), name)
-
-        const readFilePath = path.resolve(dest, file.dir, `${file.name}.ejs`)
-
-        const outputFilePath = path.resolve(dest, filePath)
-
-        const templateCode = await fs.readFile(readFilePath)
-
-        const code = ejs.render(templateCode.toString(), options);
-
-        const extname = path.extname(filePath).replace(/[.]/g, '')
-
-        try {
-            switch (extname) {
-                case 'vue':
-                    prettierCode = await prettierFormatter(code, {
-                        parser: 'vue',
-                        plugins: [
-                            prettierPluginHtml,
-                            prettierPluginBabel,
-                            prettierPluginEstree,
-                            prettierPluginTypescript,
-                            prettierPluginPostcss
-                        ]
-                    });
-                    break;
-                case 'ts':
-                case 'tsx':
-                case 'jsx':
-                case 'js':
-                    prettierCode = await prettierFormatter(code, {
-                        parser: 'babel',
-                        plugins: [prettierPluginBabel, prettierPluginEstree]
-                    });
-                    break;
-                case 'json':
-                    prettierCode = await prettierFormatter(code, {
-                        parser: "json",
-                        plugins: [prettierPluginBabel, prettierPluginEstree]
-                    });
-                    break;
-                case 'cjs':
-                    prettierCode = await prettierFormatter(code, {
-                        parser: "babel",
-                        plugins: [prettierPluginBabel, prettierPluginEstree]
-                    });
-                    break;
-                case 'html':
-                    prettierCode = await prettierFormatter(code, {
-                        parser: 'html',
-                        plugins: [prettierPluginHtml]
-                    });
-                    break;
-                case 'css':
-                case 'scss':
-                case 'less':
-                    prettierCode = await prettierFormatter(code, {
-                        parser: 'css',
-                        plugins: [prettierPluginPostcss]
-                    });
-                    break;
-                case 'toml':
-                    prettierCode = code
-                    break
-                default:
-                    // Fallback: keep code as-is to avoid pulling extra parsers
-                    prettierCode = code
-                    break
-            }
-        } catch (err) {
-            console.log(err)
-        }
-        await fs.outputFile(outputFilePath, prettierCode)
-        await fs.remove(readFilePath)
-    } catch (error) {
-        console.log(error)
-    }
+  const file = path.parse(filePath);
+  const destination = options.dest ?? path.resolve(name);
+  const input = path.resolve(destination, file.dir, `${file.name}.ejs`);
+  const output = path.resolve(destination, filePath);
+  try {
+    const template = await fs.readFile(input, 'utf8');
+    const code = ejs.render(template, { ...options, name: options.packageName ?? name }, { filename: input });
+    const formatted = await format(code, { filepath: output });
+    await fs.outputFile(output, formatted);
+    await fs.remove(input);
+  } catch (cause) {
+    const detail = cause instanceof Error ? cause.message : String(cause);
+    throw new Error(`Could not generate ${filePath}: ${detail}`, { cause });
+  }
 }

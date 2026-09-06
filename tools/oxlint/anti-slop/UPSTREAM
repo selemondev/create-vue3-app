@@ -1,0 +1,15 @@
+Project: anti-slop
+Author: Dillon Mulroy
+Source: https://github.com/dmmulroy/anti-slop
+Revision: e8c4880471b23ab7f216fba7b27d173a6ef07d4c
+Vendored path: skills/install-anti-slop/assets/anti-slop
+License: MIT (see LICENSE)
+
+Copied with the upstream skills/install-anti-slop/scripts/install.mjs installer
+from a temporary checkout outside this repository. Generic plugin sources are
+unchanged. The optional effect/ plugin is omitted because this project does
+not directly depend on Effect. No installer or skill files are vendored.
+
+When updating, review the upstream installer and plugin changes, preserve this
+license and attribution, and keep oxlint and @oxlint/plugins pinned to the same
+exact version.

@@ -1,13 +1,18 @@
-# Create Vue 3 App
+<h1 align="center">Create Vue 3 App</h1>
 
-<p>
-  <a href="https://www.npmjs.com/package/@selemondev/create-vue3-app">
-    <img alt="npm version" src="https://img.shields.io/npm/v/@selemondev/create-vue3-app/latest.svg?style=flat&colorA=020420&colorB=00DC82" />
-  </a>
-  <a href="https://www.npmjs.com/package/@selemondev/create-vue3-app">
-    <img alt="npm downloads" src="https://img.shields.io/npm/dm/@selemondev/create-vue3-app.svg?style=flat&colorA=020420&colorB=00DC82" />
-  </a>
-</p>
+<div align="center">
+
+<!-- automd:badges name="@selemondev/create-vue3-app" github="selemondev/create-vue3-app" license licenseBranch="master" provider="shields" color="00DC82" labelColor="020420" -->
+
+[![npm version](https://img.shields.io/npm/v/@selemondev/create-vue3-app?color=00DC82&labelColor=020420)](https://npmjs.com/package/@selemondev/create-vue3-app)
+[![npm downloads](https://img.shields.io/npm/dm/@selemondev/create-vue3-app?color=00DC82&labelColor=020420)](https://npm.chart.dev/@selemondev/create-vue3-app)
+[![license](https://img.shields.io/github/license/selemondev/create-vue3-app?color=00DC82&labelColor=020420)](https://github.com/selemondev/create-vue3-app/blob/master/LICENSE)
+
+<!-- /automd -->
+
+[![CI](https://github.com/selemondev/create-vue3-app/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/selemondev/create-vue3-app/actions/workflows/ci.yml)
+
+</div>
 
 Create a Vue 3 project powered by Vite, with the tools you choose.
 

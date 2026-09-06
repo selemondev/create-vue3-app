@@ -1,71 +1,68 @@
 # Contributing
 
-Thank you for your valuable contribution and dedication to improving this project! We greatly appreciate your involvement. To ensure a smooth and cohesive collaboration, we have provided some guidelines to help you get started. Kindly take a moment to review them before submitting your contributions. Your efforts will undoubtedly make this project even better, and we look forward to working together on its success!.
+Use focused pull requests and [Conventional Commits](https://www.conventionalcommits.org/). Preserve existing flags, generated project capabilities, and unattended execution. Follow the [Code of Conduct](CODE_OF_CONDUCT.md); contributions are licensed under the project's MIT license.
 
-## Code of Conduct
+## Local setup
 
-This project is governed by the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md). By participating, you are expected to adhere to it.
+Use Node.js **24 LTS** for development and **pnpm 10.34.5**, pinned in `package.json`. The published CLI supports Node 20.19+ or 22.12+, but the vendored TypeScript lint plugin needs native type stripping (Node 22.18+); development tooling must not silently raise the CLI runtime minimum.
 
-## Open Development
-
-All work happens directly on `GitHub`. Both core team members and external contributors send pull requests which go through the same `code review` process.
-
-## Semantic Versioning
-
-This project follows semantic versioning. We release patch versions for bug fixes or other changes that do not change the behavior of the API, minor versions for new features that are backward-compatible, and major versions for any breaking changes.
-
-Every significant change is documented in the changelog file.
-
-## Reporting Issues
-
-Welcome to Create-Vue3-App CLI! We value your feedback and contributions to make this project better. If you encounter any bugs or have feature requests, please use [Github issues](https://github.com/selemondev/create-vue3-app/issues) issues to submit them.
-
-Before reporting an issue, we ask you to:
-
-1. `Search for Similar Issues` : Ensure you have searched through our existing issues to see if the problem or feature request has already been addressed or is under discussion.
-
-2. `Reproduce the Bug` : If reporting a bug, please provide the minimum code required to reproduce the issue. This will help us understand and resolve the problem more efficiently.
-
-3. `Describe Feature Requests` : For feature requests, please describe the desired functionality and any additional context that might be helpful.
-
-Your participation and attention to these guidelines will help us maintain a more organized and effective development process.
-
-## Commit Guidelines
-
-Commit messages are required to follow the [conventional-changelog standard](https://www.conventionalcommits.org/en/v1.0.0/):
-
-```bash
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
+```sh
+npm install -g pnpm@10.34.5
+pnpm install --frozen-lockfile
+pnpm dev --help
+pnpm dev /tmp/my-vue-app --yes --no-install
 ```
 
-👉 [Commit example](https://github.com/unocss/unocss/releases/tag/v0.39.0)
+Use a disposable directory for scaffolding. `pnpm dev` runs TypeScript directly; `pnpm build:package` produces the published ESM and CommonJS entries, declaration files, and lazy ESM chunks in `dist/`. Templates are packaged beside `dist/`.
 
-### Commit types
+## Validation
 
-The following is a list of commit types:
+```sh
+pnpm typecheck
+pnpm lint
+pnpm test
+pnpm test:templates
+pnpm pack
+```
 
-### Commit Types:
+- `typecheck` checks CLI source and regression tests, not unrendered template sources.
+- `lint` runs Oxlint and all generic anti-slop rules, treating warnings as failures.
+- `test` builds the package and runs isolated Node test-runner regressions against actual CLI/subprocess/filesystem behavior. No prompt snapshots or module mocks are required.
+- `test:templates` builds the CLI, generates full and minimal JS/TS applications in temporary directories, installs their dependencies with npm, builds them, and exercises selected lint, type-check, and Vitest workflows. Lint runs with `--no-fix`, including the temporary test file, so verification cannot silently repair generated defects. It requires network access and cleans up its fixtures. Its temporary counter test verifies a real Pinia transition; generated projects are not populated with wording-only starter tests.
+- `pack` checks the distributable; do not publish smoke-test artifacts.
 
-- `feat`: Adding a new snippet or significant functionality to the Create-Vue3-App CLI.
+For interaction changes, also use a real terminal: inspect the guided flow, feature toggles, cancellation, a nonempty destination, and `NO_COLOR=1`. Check redirected input and `CI=1` separately. Help/version must remain fast, network-free, and free of package-manager detection errors.
 
-- `fix`: Addressing bugs or issues in existing Create-Vue3-App CLI.
+CI validates the CLI on Linux, Windows, and macOS, includes the supported Node runtime floor, and runs generated-project integration and lint on Node 24. Hosted CI results are required before merging; a locally passing Linux check is not evidence of Windows/macOS execution.
 
-- `docs`: Commits related to documentation changes for Create-Vue3-App CLI.
+## Architecture
 
-- `style`: Commits related to code formatting, styling, or theming of Create-Vue3-App CLI.
+- `src/index.ts`: Commander registration, flags, runtime guard, deferred workflow loading, and top-level error status.
+- `src/core/questions/vue/`: gathers intent and prepares template data. Flags are resolved before interactive questions.
+- `src/core/command/create-vue-next/`: staged generation, installation, and optional Git initialization.
+- `src/deps/vue/` and `template/`: dependency ranges and generated project files.
+- `src/utils/`: checked subprocesses, rendering, validation, and terminal-aware Clack output.
 
-- `refactor`: Code changes that enhance the library's structure without introducing new features or fixing bugs.
+Do not add a new abstraction for a single callback or add a configuration system the CLI does not need. Fix expected errors at their source; never convert a failed subprocess or formatter into success.
 
-- `perf`: Commits aimed at improving performance for Create-Vue3-App CLI.
+## Anti-slop
 
-- `test`: Commits related to testing Create-Vue3-App CLI.
+The [anti-slop installation skill](https://github.com/dmmulroy/anti-slop/tree/main/skills/install-anti-slop) was used to vendor the generic plugin into `tools/oxlint/anti-slop`. Its upstream commit and license are included there. `oxlint.config.ts` enables all 15 generic rules at error; no Effect policy is enabled because this project does not use Effect.
 
-- `chore`: Other commits not affecting source or test files directly.
+The agent skill itself is not part of this repository. Do not commit downloaded skills, installer scripts, or agent directories. The vendored lint implementation **is** project tooling and is intentionally committed. Keep `oxlint` and `@oxlint/plugins` pinned to exactly matching versions. Compare upstream changes before replacing local rules; do not disable rules or add unsafe casts just to pass lint.
 
-## License
+## Dependencies and releases
 
-By contributing your code to the repository, you agree to license your contribution under the [MIT license](./LICENSE).
+Update CLI dependencies and generated application dependencies as separate reviewed changes. Check engine requirements, peers, removed APIs, both module formats, and installed template workflows before moving a major version. TypeScript stays on the 5.9 compiler API used by tsup and vue-tsc; Commander 14 retains its CommonJS-compatible line and Node 20 support. Package-name validation stays on version 7 because version 8 requires newer Node patch releases than the supported runtime floor. Do not blanket-upgrade generated dependencies during normal scaffolding.
+
+Existing release commands remain available:
+
+```sh
+pnpm generate:release
+pnpm package:beta
+pnpm package
+```
+
+`generate:release` runs changelogen to update release metadata. `package:beta` builds and publishes with the beta tag; `package` builds and publishes publicly. These commands mutate release state or publish to npm and require maintainer authorization and npm credentials. Run all validation and inspect the tarball before publishing. Never run publishing commands as a smoke test.
+
+Document behavior changes in `CHANGELOG.md`, and commit each coherent implementation step separately with its relevant verification.

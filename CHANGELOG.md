@@ -1,5 +1,32 @@
 # Changelog
 
+## Unreleased
+
+### CLI experience
+
+- Replace the legacy prompt and spinner libraries with `@clack/prompts`: language selection, grouped feature choices, project summaries, progress, and actionable next steps.
+- Preserve existing flags, `--ts`/`--typescript`, package-manager precedence, package identity, binary mapping, and ESM/CommonJS entry points.
+- Add negative feature flags, `--yes`, `--install`, `--no-install`, `--deploy`, `--git`, `--no-git`, and explicit overwrite control with `--force`.
+- Make unattended execution deterministic: require a project directory and use guided defaults for unanswered choices. CI, redirected streams, and dumb terminals never wait for prompts.
+- Keep help/version on a deferred, network-free startup path; report expected errors and cancellation without stack traces.
+
+### Safety and compatibility
+
+- Render and format templates in a temporary directory before modifying the destination. Reject conflicting symlinks, filesystem roots, and home directories.
+- Existing nonempty destinations now require confirmation or `--force`. `--yes` never authorizes overwriting; unrelated files and Git state are preserved.
+- Propagate installation, Git, rendering, and formatting failures instead of reporting success. Pass subprocess arguments literally rather than through a shell.
+- Preserve existing Git worktrees and their index/history instead of reinitializing or committing them.
+- Normal installation now uses reviewed template dependency ranges. Previously automatic latest-major updates require `--update-deps` and `npx`; installation must also be enabled.
+- Declare and enforce Node `^20.19.0 || >=22.12.0` for the CLI. Generated ESLint/Vitest/Netlify selections record their additional runtime constraints in `engines.node`; development linting uses Node 24.
+
+### Dependencies and generated applications
+
+- Update Commander, EJS, fs-extra, Prettier, TypeScript, tsup, and generated Vue tooling. Replace esno with tsx; remove prompts, ora, picocolors, unused conf, and obsolete prompt types.
+- Modernize Vue Router, Pinia, VueUse, Vue Query, DevTools, Vitest, Vite, and deployment CLIs. Use Tailwind 4's Vite integration and ESLint flat configuration.
+- Keep TypeScript on 5.9 for the existing compiler integrations, Commander on its CommonJS-compatible Node 20 line, and package-name validation on its Node 20-compatible line.
+- Add focused behavioral regressions, real generated-project validation, and CI coverage for supported Node versions plus Linux, Windows, and macOS.
+- Configure all generic anti-slop rules through vendored project tooling with matching, pinned Oxlint dependencies. Agent skills and skill directories are not committed.
+
 
 ## v0.0.11
 

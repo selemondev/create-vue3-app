@@ -2,18 +2,24 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+<% if (useTailwind) { -%>
+import tailwindcss from '@tailwindcss/vite'
+<% } -%>
 <% if (useDevTool) {
   -%>
   import VueDevTools from 'vite-plugin-vue-devtools'
 <% } -%>
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
     plugins: [
       vue(),
       <% if (useDevTool) {
         -%>
-        VueDevTools()
+        VueDevTools(),
+      <% } -%>
+      <% if (useTailwind) { -%>
+        tailwindcss(),
       <% } -%>
     ],
     resolve: {

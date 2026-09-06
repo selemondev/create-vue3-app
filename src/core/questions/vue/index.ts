@@ -22,5 +22,9 @@ export async function runPrompt(): Promise<void> {
   options.useVercelCLI = options.deploy === 'vercel';
   options.useNetlifyCLI = options.deploy === 'netlify';
   options.useEslintTs = options.useTypeScript;
+  options.nodeEngine = '^20.19.0 || >=22.12.0';
+  if (options.useVitest) options.nodeEngine = '^20.19.0 || ^22.12.0 || >=24.0.0';
+  if (options.useEslint) options.nodeEngine = '^20.19.0 || ^22.13.0 || >=24.0.0';
+  if (options.useNetlifyCLI) options.nodeEngine = options.useEslint || options.useVitest ? '^22.13.0 || >=24.0.0' : '>=22.13.0';
   options.useJavaScript = !options.useTypeScript;
 }

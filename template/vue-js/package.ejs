@@ -1,11 +1,14 @@
 {
-  "name": "vite-template",
+  "name": <%- JSON.stringify(name) %>,
   "private": true,
   "version": "1.0.0",
   <% if (package === 'pnpm') { -%>
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@10.34.5",
   <% } -%>
   "type": "module",
+  "engines": {
+    "node": <%- JSON.stringify(nodeEngine) %>
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -61,7 +64,5 @@
       <%- NetlifyCLI %>
     <% } -%>
     <%- constantDevDeps %>
-    "vite": "^5.0.11",
-    "@vitejs/plugin-vue": "^5.0.3"
   }
 }

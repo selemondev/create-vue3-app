@@ -44,6 +44,7 @@ export interface Options {
     yes?: boolean
     force?: boolean
     updateDeps?: boolean
+    nodeEngine?: string
   }
   
   const options: Options = {}

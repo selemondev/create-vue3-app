@@ -17,6 +17,9 @@
           -%>
       import TheWelcome from './components/TheWelcome.vue';
       <% } -%>
+      <% if (useTanStackVueQuery) { -%>
+      import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
+      <% } -%>
       </script>
       <% } -%>
 

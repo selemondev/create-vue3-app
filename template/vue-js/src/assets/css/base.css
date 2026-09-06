@@ -17,7 +17,7 @@ body {
   border-radius: 0.5rem;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  width: full;
+  width: 100%;
 }
 
 .gradient-border {

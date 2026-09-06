@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit",
     "test": "pnpm build:package && node --import tsx --test tests/*.test.ts",
     "lint": "oxlint --deny-warnings",
+    "test:templates": "pnpm build:package && node scripts/verify-templates.mjs",
     "generate:release": "pnpx changelogen@latest --release",
     "package:beta": "pnpm build:package && npm publish --tag beta",
     "package": "pnpm build:package && npm publish --access=public"

@@ -28,7 +28,7 @@ Object.keys(deps).forEach((item: string) => {
 const lintMap = new Map([
   [
     'EslintScript',
-    '"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",'
+    '"lint": "eslint . --fix",'
   ],
 
   [
@@ -38,7 +38,7 @@ const lintMap = new Map([
 
   [
     'TypeScriptScript',
-    '"type-check": "vue-tsc --noEmit"'
+    '"type-check": "vue-tsc --build"'
   ]
 ])
 

@@ -51,7 +51,7 @@ export function getFilterFile() {
     }
 
     if (!options.useEslint) {
-      await fs.remove(`${options.dest}/.eslintrc.cjs`)
+      await fs.remove(`${options.dest}/eslint.config.js`)
     }
     return true
   }

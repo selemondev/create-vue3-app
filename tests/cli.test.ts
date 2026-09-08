@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { spawnSync } from "node:child_process";
+import packageJson from "../package.json";
 import {
   mkdtempSync,
   readFileSync,
@@ -37,7 +38,7 @@ test("version is clean and usable without package managers on PATH", (context) =
     env: { ...process.env, PATH: "", NO_COLOR: "1" },
   });
   assert.equal(result.status, 0);
-  assert.equal(result.stdout, "0.0.11\n");
+  assert.equal(result.stdout, `${packageJson.version}\n`);
   assert.equal(result.stderr, "");
 });
 

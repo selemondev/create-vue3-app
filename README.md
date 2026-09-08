@@ -2,10 +2,12 @@
 
 <div align="center">
 
-<!-- automd:badges name="@selemondev/create-vue3-app" github="selemondev/create-vue3-app" license licenseBranch="master" provider="shields" color="00DC82" labelColor="020420" -->
+<!-- automd:badges name="@selemondev/create-vue3-app" github="selemondev/create-vue3-app" license licenseBranch="master" provider="shields" color="00DC82" labelColor="020420" bundlephobia packagephobia -->
 
 [![npm version](https://img.shields.io/npm/v/@selemondev/create-vue3-app?color=00DC82&labelColor=020420)](https://npmjs.com/package/@selemondev/create-vue3-app)
 [![npm downloads](https://img.shields.io/npm/dm/@selemondev/create-vue3-app?color=00DC82&labelColor=020420)](https://npm.chart.dev/@selemondev/create-vue3-app)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/@selemondev/create-vue3-app?color=00DC82&labelColor=020420)](https://bundlephobia.com/package/@selemondev/create-vue3-app)
+[![install size](https://badgen.net/packagephobia/install/@selemondev/create-vue3-app?color=00DC82&labelColor=020420)](https://packagephobia.com/result?p=@selemondev/create-vue3-app)
 [![license](https://img.shields.io/github/license/selemondev/create-vue3-app?color=00DC82&labelColor=020420)](https://github.com/selemondev/create-vue3-app/blob/master/LICENSE)
 
 <!-- /automd -->

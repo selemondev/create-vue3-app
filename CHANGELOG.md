@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## v1.0.0
+
+[compare changes](https://github.com/selemondev/create-vue3-app/compare/v0.0.12...v1.0.0)
 
 ### CLI experience
 

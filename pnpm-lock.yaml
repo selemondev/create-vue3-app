@@ -28,7 +28,7 @@ importers:
         version: 11.4.0
       prettier:
         specifier: ^3.9.6
-        version: 3.9.6
+        version: 3.9.9
       validate-npm-package-name:
         specifier: ^7.0.0
         version: 7.0.2
@@ -805,8 +805,8 @@ packages:
       yaml:
         optional: true
 
-  prettier@3.9.6:
-    resolution: {integrity: sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g==}
+  prettier@3.9.9:
+    resolution: {integrity: sha512-Z/CJHIkdujO/OtN7nXUii0Rf3VT5SRuhjBA82Xvu2XhBUgX3nhP67T0LHceBdQLex7OOFGTox+Q5Yg8Jk2Qivg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -1464,7 +1464,7 @@ snapshots:
     optionalDependencies:
       tsx: 4.23.13
 
-  prettier@3.9.6: {}
+  prettier@3.9.9: {}
 
   readdirp@4.1.2: {}
 

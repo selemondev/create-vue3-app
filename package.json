@@ -44,7 +44,7 @@
   ],
   "author": "Selemondev",
   "license": "MIT",
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@12.6.0",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },

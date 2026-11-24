@@ -73,3 +73,7 @@ npx @selemondev/create-vue3-app@latest --help
 ## Contributing
 
 Bug reports and pull requests are welcome. See the [Contributing Guide](CONTRIBUTING.md) to get started.
+
+## License
+
+[MIT](./LICENSE) © [Selemon Brahanu](https://selemon.dev)

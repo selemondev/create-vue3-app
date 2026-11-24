@@ -8,6 +8,22 @@ import { vueFetchTemplateFiles } from "../../utils/vue/templateFile";
 import { filterFiles } from "../../../filter/filterFiles";
 import { progress } from "../../../utils/logger";
 
+async function listGeneratedFiles(
+  directory: string,
+  root = directory,
+): Promise<string[]> {
+  const files: string[] = [];
+  for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...(await listGeneratedFiles(file, root)));
+    } else if (entry.isFile() || entry.isSymbolicLink()) {
+      files.push(path.relative(root, file).split(path.sep).join("/"));
+    }
+  }
+  return files;
+}
+
 async function checkDestination(
   source: string,
   destination: string,
@@ -66,6 +82,7 @@ export default async function copyTemplate(): Promise<void> {
         signal.throwIfAborted();
         await ejsRender(file, name);
       }
+      options.generatedFiles = await listGeneratedFiles(stage);
       await checkDestination(stage, destination);
       signal.throwIfAborted();
       if (await fs.pathExists(destination))

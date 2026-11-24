@@ -32,8 +32,11 @@ export default async function installDeps(): Promise<void> {
       );
     } else {
       logger.info("Initializing Git repository");
+      const generatedFiles = options.generatedFiles;
+      if (!generatedFiles?.length)
+        throw new Error("Generated file list is unavailable for Git initialization.");
       await command("git", ["init"]);
-      await command("git", ["add", "."]);
+      await command("git", ["add", "--", ...generatedFiles]);
       await command("git", ["commit", "-m", "Initialized by create-vue3-app"]);
     }
   }

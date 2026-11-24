@@ -190,3 +190,30 @@ test("Git initialization preserves an existing repository boundary", (context) =
     before,
   );
 });
+
+test("Git initialization in a forced nonempty directory commits only generated files", (context) => {
+  const cwd = workspace(context);
+  mkdirSync(join(cwd, "my-app"));
+  writeFileSync(join(cwd, "my-app/notes.txt"), "user notes");
+  const env = {
+    ...process.env,
+    CI: "1",
+    NO_COLOR: "1",
+    GIT_AUTHOR_NAME: "CLI Test",
+    GIT_AUTHOR_EMAIL: "cli@example.invalid",
+    GIT_COMMITTER_NAME: "CLI Test",
+    GIT_COMMITTER_EMAIL: "cli@example.invalid",
+  };
+  const result = spawnSync(
+    process.execPath,
+    [executable, "my-app", "--yes", "--no-install", "--git", "--force"],
+    { cwd, encoding: "utf8", env, timeout: 10000 },
+  );
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  const tracked = spawnSync("git", ["ls-files"], {
+    cwd: join(cwd, "my-app"),
+    encoding: "utf8",
+  }).stdout.split("\n");
+  assert.ok(tracked.includes("package.json"));
+  assert.ok(!tracked.includes("notes.txt"));
+});

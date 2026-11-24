@@ -41,6 +41,7 @@ export interface Options {
   force?: boolean;
   updateDeps?: boolean;
   nodeEngine?: string;
+  generatedFiles?: string[];
 }
 
 const options: Options = {};

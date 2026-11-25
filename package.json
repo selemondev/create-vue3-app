@@ -58,7 +58,7 @@
     "oxlint": "1.81.0",
     "tsup": "^8.5.1",
     "tsx": "^4.23.13",
-    "typescript": "~5.9.3"
+    "typescript": "~7.0.0"
   },
   "dependencies": {
     "@clack/prompts": "^1.7.0",
